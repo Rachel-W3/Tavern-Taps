@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class IngredientPlot : MonoBehaviour
-{   
+{
     //Fields
+    public Button plotButton;
+
     [SerializeField] IngredientManager.IngredientTypes type;
     [SerializeField] static float growthRate = 1.0f;
     [SerializeField] int growthAmount = 1;
     [SerializeField] int ingredientCapacity = 100;
-    private int storedIngredient = 0;
+    [SerializeField] private int storedIngredient = 0;
 
     //Properties
     public IngredientManager.IngredientTypes Type { get => type; }
@@ -29,9 +31,11 @@ public class IngredientPlot : MonoBehaviour
 
     public bool harvest()
     {
+        Debug.Log("Harvested!");
         if (storedIngredient > 0)
         {
             IngredientManager.Ingredients.addIngredient(storedIngredient, type);
+            storedIngredient = 0;
             return true;
         }
         return false; 
@@ -47,9 +51,10 @@ public class IngredientPlot : MonoBehaviour
         while(true)
         {
             yield return waitForGrowth;
-            if (storedIngredient + growthAmount < ingredientCapacity)
+            if (storedIngredient + growthAmount <= ingredientCapacity)
             {
                 storedIngredient += growthAmount;
+                Debug.Log(storedIngredient);
             }
             else { storedIngredient = ingredientCapacity; }
         }
