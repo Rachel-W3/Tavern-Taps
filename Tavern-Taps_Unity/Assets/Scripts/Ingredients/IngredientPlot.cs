@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IngredientPlot : MonoBehaviour
 {   
@@ -26,12 +27,6 @@ public class IngredientPlot : MonoBehaviour
         StartCoroutine(createIngredient());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public bool harvest()
     {
         if (storedIngredient > 0)
@@ -40,6 +35,11 @@ public class IngredientPlot : MonoBehaviour
             return true;
         }
         return false; 
+    }
+
+    public void harvestOnClick()
+    {
+        harvest();
     }
 
     IEnumerator createIngredient()
