@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class IngredientPlot : MonoBehaviour
 {
     //Fields
     public Button plotButton;
-
+    [SerializeField] string plotName;
     [SerializeField] IngredientManager.IngredientTypes type;
     [SerializeField] static float growthRate = 1.0f;
     [SerializeField] int growthAmount = 1;
@@ -26,12 +26,12 @@ public class IngredientPlot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        plotButton.onClick.AddListener(harvestOnClick);
         StartCoroutine(createIngredient());
     }
 
     public bool harvest()
     {
-        Debug.Log("Harvested!");
         if (storedIngredient > 0)
         {
             IngredientManager.Ingredients.addIngredient(storedIngredient, type);
@@ -54,7 +54,7 @@ public class IngredientPlot : MonoBehaviour
             if (storedIngredient + growthAmount <= ingredientCapacity)
             {
                 storedIngredient += growthAmount;
-                Debug.Log(storedIngredient);
+                plotButton.GetComponentInChildren<Text>().text = plotName + " (" + storedIngredient.ToString() + ")";
             }
             else { storedIngredient = ingredientCapacity; }
         }
