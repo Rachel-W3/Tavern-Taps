@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="position: absolute; height: 53px; width: 290px; top: 465px; left: 0; flex-direction: row; flex-grow: 1; flex-shrink: 0;">
+        <ui:Button text="Farm" display-tooltip-when-elided="true" style="flex-grow: 1;" />
+        <ui:Button text="Tavern" display-tooltip-when-elided="true" style="flex-grow: 1;" />
+        <ui:Button text="Map" display-tooltip-when-elided="true" style="flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>

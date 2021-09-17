@@ -5,5 +5,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Dish : ScriptableObject
 {
-    [SerializeField] private string Name;
+    public string Name;
+    public Texture2D Image;
 }
