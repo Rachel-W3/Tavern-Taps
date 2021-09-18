@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,23 +12,24 @@ public class IngredientManager : MonoBehaviour
     //Fields
     public enum IngredientTypes
     {
-        Red,
-        Yellow,
-        Blue,
-        Green
+        Meat,
+        Veggies,
+        Dairy,
+        Grain
     }
 
     [SerializeField] private int redAmt;
-    [SerializeField] private int ylwAmt;
-    [SerializeField] private int bluAmt;
+    [SerializeField] private int vegAmt;
+    [SerializeField] private int dryAmt;
     [SerializeField] private int grnAmt;
 
+    public List<Dish> Dishes;
 
     //Properties
-    public int RedAmt { get => redAmt; }
-    public int YellowAmt { get => ylwAmt; }
-    public int BlueAmt { get => bluAmt; }
-    public int GreenAmt { get => grnAmt; }
+    public int MeatAmt { get => redAmt; }
+    public int VeggiesAmt { get => vegAmt; }
+    public int DairyAmt { get => dryAmt; }
+    public int GrainAmt { get => grnAmt; }
 
     private void Awake()
     {
@@ -40,37 +42,37 @@ public class IngredientManager : MonoBehaviour
     {
         switch (ingredient)
         {
-            case IngredientTypes.Red:
-                addRed(amt);
+            case IngredientTypes.Meat:
+                addMeat(amt);
                 break;
             
-            case IngredientTypes.Yellow:
-                addYlw(amt);
+            case IngredientTypes.Veggies:
+                addVeg(amt);
                 break;
 
-            case IngredientTypes.Blue:
-                addBlu(amt);
+            case IngredientTypes.Dairy:
+                addDry(amt);
                 break;
 
-            case IngredientTypes.Green:
+            case IngredientTypes.Grain:
                 addGrn(amt);
                 break;
         }   
     }
 
-    private void addRed(int amt)
+    private void addMeat(int amt)
     {
         redAmt += amt; 
     }
 
-    private void addYlw(int amt)
+    private void addVeg(int amt)
     {
-        ylwAmt += amt;
+        vegAmt += amt;
     }
 
-    private void addBlu(int amt)
+    private void addDry(int amt)
     {
-        bluAmt += amt;
+        dryAmt += amt;
     }
 
     private void addGrn(int amt)
@@ -78,51 +80,107 @@ public class IngredientManager : MonoBehaviour
         grnAmt += amt;
     }
 
+    //Check if there are ingredients
+    public bool checkIngredient(int amt, IngredientTypes ingredient)
+    {
+        switch (ingredient)
+        {
+            case IngredientTypes.Meat:
+                return checkMeat(amt);
+
+            case IngredientTypes.Veggies:
+                return checkVeg(amt);
+
+            case IngredientTypes.Dairy:
+                return checkDry(amt);
+
+            case IngredientTypes.Grain:
+                return checkGrn(amt);                
+        }
+        return false;
+    }
+
+    private bool checkMeat(int amt)
+    {
+        if (redAmt - amt >= 0)
+        {
+            return true;
+        }
+        return false;   
+    }
+
+    private bool checkVeg(int amt)
+    {
+        if (vegAmt - amt >= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool checkDry(int amt)
+    {
+        if (dryAmt - amt >= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool checkGrn(int amt)
+    {
+        if (grnAmt - amt >= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
     //Remove Ingredients
     public bool removeIngredient(int amt, IngredientTypes ingredient)
     {
         switch (ingredient)
         {
-            case IngredientTypes.Red:
-                return subRed(amt);
+            case IngredientTypes.Meat:
+                return subMeat(amt);
 
-            case IngredientTypes.Yellow:
-                return subYlw(amt);
+            case IngredientTypes.Veggies:
+                return subVeg(amt);
 
-            case IngredientTypes.Blue:
-                return subBlu(amt);
+            case IngredientTypes.Dairy:
+                return subDry(amt);
 
-            case IngredientTypes.Green:
-                return subGrn(amt);                
+            case IngredientTypes.Grain:
+                return subGrn(amt);
         }
         return false;
     }
 
-    private bool subRed(int amt)
+    private bool subMeat(int amt)
     {
         if (redAmt - amt >= 0)
         {
             redAmt -= amt;
             return true;
         }
-        return false;   
+        return false;
     }
 
-    private bool subYlw(int amt)
+    private bool subVeg(int amt)
     {
-        if (ylwAmt - amt >= 0)
+        if (vegAmt - amt >= 0)
         {
-            ylwAmt -= amt;
+            vegAmt -= amt;
             return true;
         }
         return false;
     }
 
-    private bool subBlu(int amt)
+    private bool subDry(int amt)
     {
-        if (bluAmt - amt >= 0)
+        if (dryAmt - amt >= 0)
         {
-            bluAmt -= amt;
+            dryAmt -= amt;
             return true;
         }
         return false;
