@@ -32,8 +32,11 @@ public class RecipeMenu : MonoBehaviour
             var recipeName = recipeContainer.Query<Label>().Last();   
             recipeName.text = recipe.FinishedProduct.Name;
 
-            var recipeImage = recipeContainer.Query<VisualElement>().Last();
-            recipeImage.style.backgroundImage = recipe.FinishedProduct.Image;
+            var recipeButton = recipeContainer.Query<Button>().Last();
+            recipeButton.clicked += () => { loadRecipePage(recipe); };
+            recipeButton.style.backgroundImage = recipe.FinishedProduct.Image;
+
+            
 
         }
     }
@@ -46,8 +49,12 @@ public class RecipeMenu : MonoBehaviour
         //Load the assets at all of those paths (This may be slow at scale)
         foreach (var rawRecipe in rawRecipes)
         {
-            Debug.Log(rawRecipe);
             recipes.Add(AssetDatabase.LoadAssetAtPath<Recipe>(AssetDatabase.GUIDToAssetPath(rawRecipe)));
         }
+    }
+
+    private void loadRecipePage(Recipe recipe)
+    {
+        Debug.Log(recipe.FinishedProduct.Name);
     }
 }

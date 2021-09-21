@@ -1,5 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:ScrollView mode="VerticalAndHorizontal" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" style="height: 509px; flex-direction: row; justify-content: center; align-items: flex-start; width: 100%;">
+    <ui:Template name="DishMenu" src="DishMenu.uxml" />
+    <ui:Instance template="DishMenu" name="DishMenu" style="width: 100%; height: 100%; position: absolute; display: none;" />
+    <ui:ScrollView mode="VerticalAndHorizontal" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" name="RecipeMenu" style="height: 509px; flex-direction: row; justify-content: center; align-items: flex-start; width: 100%;">
         <ui:VisualElement name="recipesContainer" style="height: 509px; flex-direction: row; flex-wrap: wrap; width: 284px;" />
     </ui:ScrollView>
 </ui:UXML>

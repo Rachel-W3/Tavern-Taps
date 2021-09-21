@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="DishMenu" style="width: 100%; height: 100%;">
+        <ui:VisualElement name="DishContainer" style="margin-left: 10%; margin-right: 10%; margin-top: 10%; margin-bottom: 10%; width: 75%; height: 80%; align-items: center; justify-content: space-around; position: absolute; top: 16px; left: 7px;">
+            <ui:Label text="Dish Name" display-tooltip-when-elided="true" name="DishName" style="-unity-text-align: upper-center; font-size: 24px; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;" />
+            <ui:VisualElement name="DishImage" style="padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%; height: 25%; background-image: url(&apos;/Assets/Images/meal placeholder.png&apos;); width: 100%; align-items: center;" />
+            <ui:VisualElement name="IngredientsRequired" style="padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%; height: 10%; width: 100%; align-items: center; justify-content: center; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-left-color: rgb(178, 0, 0); border-right-color: rgb(178, 0, 0); border-top-color: rgb(178, 0, 0); border-bottom-color: rgb(178, 0, 0);">
+                <ui:Label text="Required Ingredients" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Stats" style="padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%; height: 10%; width: 100%; border-left-color: rgb(255, 0, 0); border-right-color: rgb(255, 0, 0); border-top-color: rgb(255, 0, 0); border-bottom-color: rgb(255, 0, 0); border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; align-items: center; justify-content: center;">
+                <ui:Label text="Stats" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
+            <ui:Label text="This is default text, if you&apos;re seeing it something has gone wrong" display-tooltip-when-elided="true" name="Description" style="flex-wrap: wrap; white-space: normal; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;" />
+            <ui:Button text="Cook" display-tooltip-when-elided="true" name="CookButton" style="position: absolute; top: 174px; left: 166px; border-top-left-radius: 100%; border-bottom-left-radius: 100%; border-top-right-radius: 100%; border-bottom-right-radius: 100%; height: 41px;" />
+        </ui:VisualElement>
+        <ui:Button text="X" display-tooltip-when-elided="true" name="ExitButton" style="position: absolute; height: 31px; top: -1px; width: 10%; left: 251px;" />
+        <ui:Button text="&gt;" display-tooltip-when-elided="true" name="NextRecipe" style="position: absolute; top: 27%; left: 250px; height: 33%; width: 10%;" />
+        <ui:Button text="&lt;&#10;" display-tooltip-when-elided="true" name="NextRecipe" style="position: absolute; top: 27%; left: 0; height: 33%; width: 10%;" />
+    </ui:VisualElement>
+</ui:UXML>
