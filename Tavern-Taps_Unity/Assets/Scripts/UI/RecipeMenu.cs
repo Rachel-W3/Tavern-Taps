@@ -7,13 +7,13 @@ using UnityEditor;
 
 public class RecipeMenu : MonoBehaviour
 {
-    private List<Dish> dishes = new List<Dish>();
+    private List<Recipe> recipes = new List<Recipe>();
     VisualElement recipeTest;
 
     public void OnEnable()
     {
         //Load the values for all of the dishes
-        loadDishes();
+        loadRecipes();
 
         //Establish the UI elements you're going to be appending to
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -23,29 +23,31 @@ public class RecipeMenu : MonoBehaviour
         var recipeTemplate = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/UI/RecipeMenuItem.uxml");
 
         //For each dish in dishes, create a recipe menu item and add it to the container
-        foreach (Dish dish in dishes)
+        foreach (Recipe recipe in recipes)
         {
+            
             recipeTemplate.CloneTree(recipeContainer);
 
             //Set the name and image of the newly created menu item
             var recipeName = recipeContainer.Query<Label>().Last();   
-            recipeName.text = dish.Name;
+            recipeName.text = recipe.FinishedProduct.Name;
 
             var recipeImage = recipeContainer.Query<VisualElement>().Last();
-            recipeImage.style.backgroundImage = dish.Image;
+            recipeImage.style.backgroundImage = recipe.FinishedProduct.Image;
 
         }
     }
 
-    private void loadDishes()
+    private void loadRecipes()
     {
         //Get the raw paths of the dishes
-        string[] rawDishes = AssetDatabase.FindAssets("t:Dish", new[] { "Assets/Scripts/Dishes" });
+        string[] rawRecipes = AssetDatabase.FindAssets("t:Recipe", new[] { "Assets/Scripts/Recipes" });
         
         //Load the assets at all of those paths (This may be slow at scale)
-        foreach (var rawDish in rawDishes)
+        foreach (var rawRecipe in rawRecipes)
         {
-            dishes.Add(AssetDatabase.LoadAssetAtPath<Dish>(AssetDatabase.GUIDToAssetPath(rawDish)));
+            Debug.Log(rawRecipe);
+            recipes.Add(AssetDatabase.LoadAssetAtPath<Recipe>(AssetDatabase.GUIDToAssetPath(rawRecipe)));
         }
     }
 }
