@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: TestDish1
   m_EditorClassIdentifier: 
   Name: TestDish1
+  Description: Test Dish 1 Description
   Image: {fileID: 2800000, guid: 2897ea52167ec61459a4076b176fd294, type: 3}
