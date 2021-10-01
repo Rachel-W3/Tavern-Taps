@@ -37,6 +37,7 @@ public class Recipe : ScriptableObject
             }
 
             IngredientManager.Ingredients.Dishes.Add(FinishedProduct);
+            Debug.LogError("Number Of Dishes " + IngredientManager.Ingredients.Dishes.Count);
         }
     }
 }

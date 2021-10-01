@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEditor;
+
 
 
 public class RecipeMenu : MonoBehaviour
 {
     private List<Recipe> recipes = new List<Recipe>();
     private int DishIndex = 0;
+    [SerializeField] private VisualTreeAsset recipeTemplate; 
 
     public void OnEnable()
     {
@@ -25,8 +26,6 @@ public class RecipeMenu : MonoBehaviour
         var DishMenu = root.Q<VisualElement>("DishMenu");
         DishMenu.style.display = StyleKeyword.None;
 
-        //Load the recipe template
-        var recipeTemplate = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/UI/RecipeMenuItem.uxml");
 
         //For each dish in dishes, create a recipe menu item and add it to the container
         foreach (Recipe recipe in recipes)
@@ -59,14 +58,9 @@ public class RecipeMenu : MonoBehaviour
 
     private void loadRecipes()
     {
-        //Get the raw paths of the dishes
-        string[] rawRecipes = AssetDatabase.FindAssets("t:Recipe", new[] { "Assets/Scripts/Recipes" });
-
-        //Load the assets at all of those paths (This may be slow at scale)
-        foreach (var rawRecipe in rawRecipes)
-        {
-            recipes.Add(AssetDatabase.LoadAssetAtPath<Recipe>(AssetDatabase.GUIDToAssetPath(rawRecipe)));
-        }
+        Recipe[] rawRecipes = Resources.LoadAll<Recipe>("");
+        foreach(Recipe recipe in rawRecipes)
+            recipes.Add(recipe);
     }
 
     private void nextRecipe()
