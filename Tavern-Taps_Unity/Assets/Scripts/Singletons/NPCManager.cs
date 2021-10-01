@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 enum NPCTypes
@@ -20,7 +21,7 @@ public class NPCManager : MonoBehaviour
     /**************/ private float             spawnCoolDown; // Time between customers entering the tavern
     /**************/ private float             timer = 0.0f;
     /**************/ private int               guestCapacity;
-    /**************/ private List<GameObject>  guests;
+    /**************/ private int               guestCount;
 
     private void Awake()
     {
@@ -35,10 +36,9 @@ public class NPCManager : MonoBehaviour
     void Start()
     {
         // May scale these fields to tavern level in the future
-        guestCapacity = 4;
-        spawnCoolDown = Random.Range(2.0f, 6.0f); 
-
-        guests = new List<GameObject>();
+        guestCapacity = 5;
+        guestCount = 0;
+        spawnCoolDown = Random.Range(0.5f, 6.0f); 
     }
 
     // Update is called once per frame
@@ -46,25 +46,45 @@ public class NPCManager : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(timer >= spawnCoolDown)
+        if(timer >= spawnCoolDown && guestCount < guestCapacity)
         {
             SpawnNPC();
             timer = 0.0f;
         }
+
+        UpdateGuestList();
     }
 
     void SpawnNPC()
     {
         // Look for available seats
-        foreach(Vector2 seatSpot in TavernManager.Instance.SeatAvailability.Keys)
+        foreach(Vector2 seatSpot in TavernManager.Instance.SeatingChart.Keys)
         {
-            bool occupied = TavernManager.Instance.SeatAvailability[seatSpot];
+            GameObject occupant = TavernManager.Instance.SeatingChart[seatSpot];
 
-            if(!occupied)
+            if(occupant == null)
             {
                 GameObject newNPC = Instantiate(npcPrefab);
                 newNPC.transform.position = seatSpot;
-                TavernManager.Instance.SeatAvailability[seatSpot] = true;
+                TavernManager.Instance.SeatingChart[seatSpot] = newNPC;
+                guestCount++;
+                return;
+            }
+        }
+    }
+
+    void UpdateGuestList()
+    {
+        // Check if guests are done eating
+        foreach(Vector2 seatSpot in TavernManager.Instance.SeatingChart.Keys)
+        {
+            GameObject occupant = TavernManager.Instance.SeatingChart[seatSpot];
+
+            if(occupant != null && occupant.GetComponent<NPC>().Satisfied)
+            {
+                TavernManager.Instance.SeatingChart[seatSpot] = null;
+                guestCount--;
+                Destroy(occupant);
                 return;
             }
         }

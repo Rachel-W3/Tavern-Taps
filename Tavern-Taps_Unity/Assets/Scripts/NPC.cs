@@ -5,6 +5,7 @@ using TMPro;
 
 public class NPC : MonoBehaviour
 {
+    // Fields
     [SerializeField] private int   npcLevel;
     /**************/ private float timePickingFood = 1.0f; // NPCs take 1 second to order food
     /**************/ private float totalEatingTime = 5.0f;
@@ -12,6 +13,9 @@ public class NPC : MonoBehaviour
     /**************/ private float timer = 0.0f;
     /**************/ private bool  satisfied;
     // TODO: Variable for food request bubble (UI)
+
+    // Properties
+    public bool Satisfied { get => satisfied; }
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +38,7 @@ public class NPC : MonoBehaviour
         if(eating && timer >= totalEatingTime)
         {
             satisfied = true;
+            timer = 0.0f;
         }
     }
 

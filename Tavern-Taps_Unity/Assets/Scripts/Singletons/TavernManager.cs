@@ -17,21 +17,21 @@ public class TavernManager : MonoBehaviour
     public static TavernManager Instance { get => instance;}
 
     // Fields
-    private int                       coins;
-    private int                       tavernLevel;
-    private List<Vector2>             seatPositions; // Might make it easier for adding new seats down the line
-    private Dictionary<Vector2, bool> seatAvailability; // Key : Value = seatPosition : occupied
+    private int                             coins;
+    private int                             tavernLevel;
+    private List<Vector2>                   seatPositions; // Might make it easier for adding new seats down the line
+    private Dictionary<Vector2, GameObject> seatingChart; // Key : Value = seatPosition : NPC occupant
 
     // Properties
     public int Coins { get => coins; }
-    public Dictionary<Vector2, bool> SeatAvailability { get => seatAvailability; }
+    public Dictionary<Vector2, GameObject> SeatingChart { get => seatingChart; }
 
     private void Awake()
     {
         // Initializing singleton
         if (instance == null) instance = this;
         seatPositions = new List<Vector2>();
-        seatAvailability = new Dictionary<Vector2, bool>();
+        seatingChart = new Dictionary<Vector2, GameObject>();
     }
 
     // Start is called before the first frame update
@@ -44,7 +44,7 @@ public class TavernManager : MonoBehaviour
 
         foreach(Vector2 pos in seatPositions)
         {
-            seatAvailability.Add(pos, false);
+            seatingChart.Add(pos, null);
         }
     }
 
