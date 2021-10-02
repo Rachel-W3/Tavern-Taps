@@ -152,10 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec93017c787433843a202e0cf05801aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redAmt: 100
-  vegAmt: 100
-  dryAmt: 100
-  grnAmt: 100
+  redAmt: 10
+  vegAmt: 10
+  dryAmt: 10
+  grnAmt: 10
   Dishes: []
 --- !u!4 &1488246125
 Transform:

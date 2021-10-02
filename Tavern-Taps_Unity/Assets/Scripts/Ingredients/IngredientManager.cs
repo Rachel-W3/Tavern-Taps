@@ -12,9 +12,8 @@ public class IngredientManager : MonoBehaviour
     //Fields
     public enum IngredientTypes
     {
-        Meat,
+        DairyMeat,
         Veggies,
-        Dairy,
         Grain
     }
 
@@ -42,16 +41,12 @@ public class IngredientManager : MonoBehaviour
     {
         switch (ingredient)
         {
-            case IngredientTypes.Meat:
-                addMeat(amt);
+            case IngredientTypes.DairyMeat:
+                addDairyMeat(amt);
                 break;
             
             case IngredientTypes.Veggies:
                 addVeg(amt);
-                break;
-
-            case IngredientTypes.Dairy:
-                addDry(amt);
                 break;
 
             case IngredientTypes.Grain:
@@ -60,7 +55,7 @@ public class IngredientManager : MonoBehaviour
         }   
     }
 
-    private void addMeat(int amt)
+    private void addDairyMeat(int amt)
     {
         redAmt += amt; 
     }
@@ -85,14 +80,11 @@ public class IngredientManager : MonoBehaviour
     {
         switch (ingredient)
         {
-            case IngredientTypes.Meat:
+            case IngredientTypes.DairyMeat:
                 return checkMeat(amt);
 
             case IngredientTypes.Veggies:
                 return checkVeg(amt);
-
-            case IngredientTypes.Dairy:
-                return checkDry(amt);
 
             case IngredientTypes.Grain:
                 return checkGrn(amt);                
@@ -141,14 +133,11 @@ public class IngredientManager : MonoBehaviour
     {
         switch (ingredient)
         {
-            case IngredientTypes.Meat:
+            case IngredientTypes.DairyMeat:
                 return subMeat(amt);
 
             case IngredientTypes.Veggies:
                 return subVeg(amt);
-
-            case IngredientTypes.Dairy:
-                return subDry(amt);
 
             case IngredientTypes.Grain:
                 return subGrn(amt);
@@ -171,16 +160,6 @@ public class IngredientManager : MonoBehaviour
         if (vegAmt - amt >= 0)
         {
             vegAmt -= amt;
-            return true;
-        }
-        return false;
-    }
-
-    private bool subDry(int amt)
-    {
-        if (dryAmt - amt >= 0)
-        {
-            dryAmt -= amt;
             return true;
         }
         return false;
