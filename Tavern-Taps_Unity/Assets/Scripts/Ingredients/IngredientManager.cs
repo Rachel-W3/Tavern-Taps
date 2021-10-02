@@ -17,23 +17,41 @@ public class IngredientManager : MonoBehaviour
         Grain
     }
 
-    [SerializeField] private int redAmt;
-    [SerializeField] private int vegAmt;
-    [SerializeField] private int dryAmt;
-    [SerializeField] private int grnAmt;
+    private int Rice_Amount;
+    private int Pasta_Amount;
+    private int Boar_Meat_Amount;
+    private int Milk_Amount;
+    private int Butter_Amount;
+    private int Mandrake_Amount;
+    private int Lettuce_Amount;
+    private int Corn_Amount;
+    private int Eggs_Amount;
+
+    [SerializeField] private int DairyMeat_Amount;
+    [SerializeField] private int Veggies_Amount;
+    [SerializeField] private int Grain_Amount;
 
     public List<Dish> Dishes;
 
     //Properties
-    public int MeatAmt { get => redAmt; }
-    public int VeggiesAmt { get => vegAmt; }
-    public int DairyAmt { get => dryAmt; }
-    public int GrainAmt { get => grnAmt; }
+    public int DairyMeatAmt { get => DairyMeat_Amount; }
+    public int VeggiesAmt { get => Veggies_Amount; }
+    public int GrainAmt { get => Grain_Amount; }
 
     private void Awake()
     {
         if (ingredientManager == null)
             ingredientManager = this; 
+    }
+
+    private void OnGUI()
+    {
+        string DishString = "";
+
+        foreach(Dish dish in Dishes)
+            DishString += "\n" + dish.Name;
+        
+        GUI.Box(new Rect(Screen.width * 2/3, Screen.width/4, Screen.width/3, Screen.height/2), "Dairy/Meat: " + DairyMeat_Amount + "\nVeggies: " + Veggies_Amount + "\nGrain: " + Grain_Amount + "\n\nDishes:" + DishString);
     }
 
     //Add Ingredients
@@ -57,22 +75,17 @@ public class IngredientManager : MonoBehaviour
 
     private void addDairyMeat(int amt)
     {
-        redAmt += amt; 
+        DairyMeat_Amount += amt; 
     }
 
     private void addVeg(int amt)
     {
-        vegAmt += amt;
-    }
-
-    private void addDry(int amt)
-    {
-        dryAmt += amt;
+        Veggies_Amount += amt;
     }
 
     private void addGrn(int amt)
     {
-        grnAmt += amt;
+        Grain_Amount += amt;
     }
 
     //Check if there are ingredients
@@ -81,7 +94,7 @@ public class IngredientManager : MonoBehaviour
         switch (ingredient)
         {
             case IngredientTypes.DairyMeat:
-                return checkMeat(amt);
+                return checkDryMeat(amt);
 
             case IngredientTypes.Veggies:
                 return checkVeg(amt);
@@ -92,9 +105,9 @@ public class IngredientManager : MonoBehaviour
         return false;
     }
 
-    private bool checkMeat(int amt)
+    private bool checkDryMeat(int amt)
     {
-        if (redAmt - amt >= 0)
+        if (DairyMeat_Amount - amt >= 0)
         {
             return true;
         }
@@ -103,16 +116,7 @@ public class IngredientManager : MonoBehaviour
 
     private bool checkVeg(int amt)
     {
-        if (vegAmt - amt >= 0)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private bool checkDry(int amt)
-    {
-        if (dryAmt - amt >= 0)
+        if (Veggies_Amount - amt >= 0)
         {
             return true;
         }
@@ -121,7 +125,7 @@ public class IngredientManager : MonoBehaviour
 
     private bool checkGrn(int amt)
     {
-        if (grnAmt - amt >= 0)
+        if (Grain_Amount - amt >= 0)
         {
             return true;
         }
@@ -134,7 +138,7 @@ public class IngredientManager : MonoBehaviour
         switch (ingredient)
         {
             case IngredientTypes.DairyMeat:
-                return subMeat(amt);
+                return subDryMeat(amt);
 
             case IngredientTypes.Veggies:
                 return subVeg(amt);
@@ -145,11 +149,11 @@ public class IngredientManager : MonoBehaviour
         return false;
     }
 
-    private bool subMeat(int amt)
+    private bool subDryMeat(int amt)
     {
-        if (redAmt - amt >= 0)
+        if (DairyMeat_Amount - amt >= 0)
         {
-            redAmt -= amt;
+            DairyMeat_Amount -= amt;
             return true;
         }
         return false;
@@ -157,9 +161,9 @@ public class IngredientManager : MonoBehaviour
 
     private bool subVeg(int amt)
     {
-        if (vegAmt - amt >= 0)
+        if (Veggies_Amount - amt >= 0)
         {
-            vegAmt -= amt;
+            Veggies_Amount -= amt;
             return true;
         }
         return false;
@@ -167,9 +171,9 @@ public class IngredientManager : MonoBehaviour
 
     private bool subGrn(int amt)
     {
-        if (grnAmt - amt >= 0)
+        if (Grain_Amount - amt >= 0)
         {
-            grnAmt -= amt;
+            Grain_Amount -= amt;
             return true;
         }
         return false;

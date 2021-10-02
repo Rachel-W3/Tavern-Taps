@@ -19,6 +19,4 @@ MonoBehaviour:
     Amount: 1
   - Type: 2
     Amount: 1
-  - Type: 3
-    Amount: 1
   FinishedProduct: {fileID: 11400000, guid: 3af48011120134944bac0d17b2c6f93e, type: 2}
