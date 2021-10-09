@@ -6,7 +6,6 @@ using TMPro;
 public class NPC : MonoBehaviour
 {
     // Fields
-    [SerializeField] private int   npcLevel;
     /**************/ private float timePickingFood = 1.0f; // NPCs take 1 second to order food
     /**************/ private float totalEatingTime = 5.0f;
     /**************/ private bool  eating;
