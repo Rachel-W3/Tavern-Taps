@@ -11,6 +11,7 @@ public class NPC : MonoBehaviour
     /**************/ private float totalEatingTime = 5.0f;
     /**************/ private bool  eating;
     /**************/ private float timer = 0.0f;
+    /**************/ private Dish  selectedDish;
     /**************/ private bool  satisfied;
     // TODO: Variable for food request bubble (UI)
 
@@ -38,6 +39,8 @@ public class NPC : MonoBehaviour
         if(eating && timer >= totalEatingTime)
         {
             satisfied = true;
+            TavernManager.Instance.Gold += selectedDish.goldOutput;
+            Debug.Log("Gold: " + TavernManager.Instance.Gold);
             timer = 0.0f;
         }
     }
@@ -48,6 +51,8 @@ public class NPC : MonoBehaviour
 
         if(numDishes > 0)
         {
+            // For now, NPCs just take the top-most dish. Will implement selections later on
+            selectedDish = IngredientManager.Ingredients.Dishes[0];
             IngredientManager.Ingredients.Dishes.RemoveAt(0);
             eating = true;
         }

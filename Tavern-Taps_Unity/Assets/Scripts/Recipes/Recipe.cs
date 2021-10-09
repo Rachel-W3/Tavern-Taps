@@ -7,8 +7,7 @@ using UnityEngine;
 public struct IngredientAmounts
 {
     public IngredientManager.IngredientTypes Type;
-    [Range(1, 999)]
-    public int Amount;
+    [Range(1, 999)] public int Amount;
 }
 
 [CreateAssetMenu]

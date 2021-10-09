@@ -17,13 +17,13 @@ public class TavernManager : MonoBehaviour
     public static TavernManager Instance { get => instance;}
 
     // Fields
-    private int                             coins;
+    private int                             gold;
     private int                             tavernLevel;
     private List<Vector2>                   seatPositions; // Might make it easier for adding new seats down the line
     private Dictionary<Vector2, GameObject> seatingChart; // Key : Value = seatPosition : NPC occupant
 
     // Properties
-    public int Coins { get => coins; }
+    public int Gold { get => gold; set => gold = value; }
     public Dictionary<Vector2, GameObject> SeatingChart { get => seatingChart; }
 
     private void Awake()
