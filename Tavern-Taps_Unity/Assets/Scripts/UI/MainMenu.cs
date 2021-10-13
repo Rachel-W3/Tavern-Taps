@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject MapUI;
 
     void Start()
-    {
+    { 
         var root = GetComponent<UIDocument>().rootVisualElement;
 
         var FarmButton = root.Q<Button>("FarmButton");
