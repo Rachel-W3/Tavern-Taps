@@ -9,22 +9,39 @@ public class RecipeMenu : MonoBehaviour
 {
     private List<Recipe> recipes = new List<Recipe>();
     private int DishIndex = 0;
-    [SerializeField] private VisualTreeAsset recipeTemplate; 
+    [SerializeField] private VisualTreeAsset recipeTemplate;
+
+    public void start()
+    {
+        var root = GetComponent<UIDocument>().rootVisualElement;
+        var recipeContainer = root.Q<VisualElement>("recipesContainer");
+
+        //Set onclick handlers
+        var DishExitButton = root.Q<Button>("ExitButton");
+        DishExitButton.clicked += hideDishMenu;
+
+        var NextRecipeButton = root.Q<Button>("NextRecipe");
+        NextRecipeButton.clicked += nextRecipe;
+
+        var PrevRecipeButton = root.Q<Button>("PrevRecipe");
+        PrevRecipeButton.clicked += prevRecipe;
+
+        var DishCookButton = root.Q<Button>("CookButton");
+        DishCookButton.clicked += () => recipes[DishIndex].Cook();
+
+    }
 
     public void OnEnable()
     {
+        var root = GetComponent<UIDocument>().rootVisualElement;
+        var recipeContainer = root.Q<VisualElement>("recipesContainer");
 
         //Load the values for all of the dishes
         loadRecipes();
 
-        //Establish the UI elements you're going to be appending to
-        var root = GetComponent<UIDocument>().rootVisualElement;
-        var recipeContainer = root.Q<VisualElement>("recipesContainer");
-
         //Hide the dish menu
         var DishMenu = root.Q<VisualElement>("DishMenu");
         DishMenu.style.display = StyleKeyword.None;
-
 
         //For each dish in dishes, create a recipe menu item and add it to the container
         foreach (Recipe recipe in recipes)
@@ -41,6 +58,13 @@ public class RecipeMenu : MonoBehaviour
 
         }
 
+    }
+
+    public void refreshUI()
+    {
+        var root = GetComponent<UIDocument>().rootVisualElement;
+        var recipeContainer = root.Q<VisualElement>("recipesContainer");
+
         //Set onclick handlers
         var DishExitButton = root.Q<Button>("ExitButton");
         DishExitButton.clicked += hideDishMenu;
@@ -53,6 +77,26 @@ public class RecipeMenu : MonoBehaviour
 
         var DishCookButton = root.Q<Button>("CookButton");
         DishCookButton.clicked += () => recipes[DishIndex].Cook();
+
+        //Hide the dish menu
+        var DishMenu = root.Q<VisualElement>("DishMenu");
+        DishMenu.style.display = StyleKeyword.None;
+
+        //For each dish in dishes, create a recipe menu item and add it to the container
+        foreach (Recipe recipe in recipes)
+        {
+            recipeTemplate.CloneTree(recipeContainer);
+
+            //Set the name and image of the newly created menu item
+            var recipeName = recipeContainer.Query<Label>().Last();
+            recipeName.text = recipe.FinishedProduct.Name;
+
+            var recipeButton = recipeContainer.Query<Button>().Last();
+            recipeButton.style.backgroundImage = recipe.FinishedProduct.Image;
+            recipeButton.clicked += () => showDishMenu(recipe);
+
+        }
+
     }
 
     private void loadRecipes()
@@ -70,7 +114,6 @@ public class RecipeMenu : MonoBehaviour
 
         showDishMenu(recipes[DishIndex]);
 
-        Debug.Log("Next");
     }
 
     private void prevRecipe()
@@ -80,8 +123,6 @@ public class RecipeMenu : MonoBehaviour
             DishIndex = recipes.Count - 1;
 
         showDishMenu(recipes[DishIndex]);
-
-        Debug.Log("Prev");
     }
 
     private void showDishMenu(Recipe recipe)
@@ -90,7 +131,6 @@ public class RecipeMenu : MonoBehaviour
         var DishMenu = root.Q<VisualElement>("DishMenu");
 
         DishIndex = FindRecipeIndex(recipe);
-        Debug.Log(DishIndex);
 
         if (DishMenu.style.display == StyleKeyword.None)
         {
@@ -107,7 +147,6 @@ public class RecipeMenu : MonoBehaviour
         var DishDescripton = root.Q<Label>("Description");
         DishDescripton.text = recipe.FinishedProduct.Description;
     }
-
 
     private void hideDishMenu()
     {

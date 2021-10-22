@@ -18,6 +18,8 @@ public class MainMenu : MonoBehaviour
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
 
+        ChangeGameState(GAME_STATE.FARM);
+
         var FarmButton = root.Q<Button>("FarmButton");
         FarmButton.clicked += () => ChangeGameState(GAME_STATE.FARM);
 
@@ -36,18 +38,18 @@ public class MainMenu : MonoBehaviour
             
             case GAME_STATE.FARM:
                 ShowObject(FarmUI);
-                HideObject(MapUI);
+                //HideObject(MapUI);
                 HideObject(TavernUI);
                 break;
 
             case GAME_STATE.TAVERN:
                 ShowObject(TavernUI);
-                HideObject(MapUI);
+                //HideObject(MapUI);
                 HideObject(FarmUI);
                 break;
 
             case GAME_STATE.MAP:
-                ShowObject(MapUI);
+                //ShowObject(MapUI);
                 HideObject(FarmUI);
                 HideObject(TavernUI);
                 break;
@@ -55,21 +57,42 @@ public class MainMenu : MonoBehaviour
             default:
                 break;
         }
-
-        Debug.Log(state);
     }
+
 
     private void HideObject(GameObject gameObject)
     {
-        Renderer rend = gameObject.GetComponent<Renderer>();
+        Canvas canvas;
+        UIDocument uiDoc;
 
-        rend.enabled = false;        
-    }
+        if ( canvas = gameObject.GetComponent<Canvas>() )
+        {
+            canvas.enabled = false;
+        }
+
+        if (uiDoc = gameObject.GetComponent<UIDocument>())
+        {
+            uiDoc.enabled = false;
+        }
+
+    }   
 
     private void ShowObject(GameObject gameObject)
     {
-        Renderer rend = gameObject.GetComponent<Renderer>();
+        Canvas canvas;
+        UIDocument uiDoc;
+        RecipeMenu uiScript;
 
-        rend.enabled = true;
+        if ( canvas = gameObject.GetComponent<Canvas>() )
+        {
+            canvas.enabled = true;
+        }
+
+        if (uiDoc = gameObject.GetComponent<UIDocument>())
+        {
+            uiDoc.enabled = true;
+            uiScript = gameObject.GetComponent<RecipeMenu>();
+            uiScript.refreshUI();
+        }
     }
 }
