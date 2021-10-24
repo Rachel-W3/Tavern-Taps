@@ -11,7 +11,7 @@ public class RecipeMenu : MonoBehaviour
     private int DishIndex = 0;
     [SerializeField] private VisualTreeAsset recipeTemplate;
 
-    public void start()
+    public void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
         var recipeContainer = root.Q<VisualElement>("recipesContainer");
