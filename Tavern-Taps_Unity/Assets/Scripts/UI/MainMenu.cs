@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
         FARM, TAVERN, MAP
     }
 
+    private GAME_STATE gameState = GAME_STATE.TAVERN;
     [SerializeField] private GameObject FarmUI;
     [SerializeField] private GameObject TavernUI;
     [SerializeField] private GameObject MapUI;
@@ -37,21 +38,33 @@ public class MainMenu : MonoBehaviour
         {
             
             case GAME_STATE.FARM:
-                ShowObject(FarmUI);
-                //HideObject(MapUI);
-                HideObject(TavernUI);
+                if (gameState != GAME_STATE.FARM)
+                { 
+                    ShowObject(FarmUI);
+                    //HideObject(MapUI);
+                    HideObject(TavernUI);
+                    gameState = GAME_STATE.FARM;
+                }
                 break;
 
             case GAME_STATE.TAVERN:
-                ShowObject(TavernUI);
-                //HideObject(MapUI);
-                HideObject(FarmUI);
+                if (gameState != GAME_STATE.TAVERN)
+                { 
+                    ShowObject(TavernUI);
+                    //HideObject(MapUI);
+                    HideObject(FarmUI);
+                    gameState = GAME_STATE.TAVERN;
+                }
                 break;
 
             case GAME_STATE.MAP:
-                //ShowObject(MapUI);
-                HideObject(FarmUI);
-                HideObject(TavernUI);
+                if (gameState != GAME_STATE.MAP)
+                {
+                    //ShowObject(MapUI);
+                    HideObject(FarmUI);
+                    HideObject(TavernUI);
+                    gameState = GAME_STATE.MAP;
+                }
                 break;
 
             default:
