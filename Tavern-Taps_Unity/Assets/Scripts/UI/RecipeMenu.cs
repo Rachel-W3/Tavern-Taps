@@ -13,51 +13,12 @@ public class RecipeMenu : MonoBehaviour
 
     public void Start()
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
-        var recipeContainer = root.Q<VisualElement>("recipesContainer");
-
-        //Set onclick handlers
-        var DishExitButton = root.Q<Button>("ExitButton");
-        DishExitButton.clicked += hideDishMenu;
-
-        var NextRecipeButton = root.Q<Button>("NextRecipe");
-        NextRecipeButton.clicked += nextRecipe;
-
-        var PrevRecipeButton = root.Q<Button>("PrevRecipe");
-        PrevRecipeButton.clicked += prevRecipe;
-
-        var DishCookButton = root.Q<Button>("CookButton");
-        DishCookButton.clicked += () => recipes[DishIndex].Cook();
-
-    }
-
-    public void OnEnable()
-    {
-        var root = GetComponent<UIDocument>().rootVisualElement;
-        var recipeContainer = root.Q<VisualElement>("recipesContainer");
-
         //Load the values for all of the dishes
         loadRecipes();
 
-        //Hide the dish menu
-        var DishMenu = root.Q<VisualElement>("DishMenu");
-        DishMenu.style.display = StyleKeyword.None;
-
-        //For each dish in dishes, create a recipe menu item and add it to the container
-        foreach (Recipe recipe in recipes)
-        {
-            recipeTemplate.CloneTree(recipeContainer);
-
-            //Set the name and image of the newly created menu item
-            var recipeName = recipeContainer.Query<Label>().Last();
-            recipeName.text = recipe.FinishedProduct.Name;
-
-            var recipeButton = recipeContainer.Query<Button>().Last();
-            recipeButton.style.backgroundImage = recipe.FinishedProduct.Image;
-            recipeButton.clicked += () => showDishMenu(recipe);
-
-        }
-
+        //Initially load in the UI
+        refreshUI();
+        
     }
 
     public void refreshUI()

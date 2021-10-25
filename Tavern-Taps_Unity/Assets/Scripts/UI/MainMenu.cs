@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
         FARM, TAVERN, MAP
     }
 
-    private GAME_STATE gameState = GAME_STATE.TAVERN;
+    private GAME_STATE gameState;
     [SerializeField] private GameObject FarmUI;
     [SerializeField] private GameObject TavernUI;
     [SerializeField] private GameObject MapUI;
@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        ChangeGameState(GAME_STATE.FARM);
+        ChangeGameState(GAME_STATE.TAVERN);
 
         var FarmButton = root.Q<Button>("FarmButton");
         FarmButton.clicked += () => ChangeGameState(GAME_STATE.FARM);
