@@ -20,7 +20,7 @@ public class Recipe : ScriptableObject
     {
         foreach (IngredientAmounts Ingredient in RequiredIngredients)
         {
-            if (!IngredientManager.Ingredients.checkIngredient(Ingredient.Amount, Ingredient.Type))
+            if (!IngredientManager.Instance.checkIngredient(Ingredient.Amount, Ingredient.Type))
                 return false;
         }
         return true;
@@ -32,11 +32,10 @@ public class Recipe : ScriptableObject
         {
             foreach (IngredientAmounts Ingredient in RequiredIngredients)
             {
-                IngredientManager.Ingredients.removeIngredient(Ingredient.Amount, Ingredient.Type);
+                IngredientManager.Instance.removeIngredient(Ingredient.Amount, Ingredient.Type);
             }
 
-            IngredientManager.Ingredients.Dishes.Add(FinishedProduct);
-            Debug.Log("Number Of Dishes " + IngredientManager.Ingredients.Dishes.Count);
+            TavernManager.Instance.Dishes.Add(FinishedProduct);
         }
     }
 }

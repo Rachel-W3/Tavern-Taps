@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07afbe785c5b86944a132905d1f49f74, type: 3}
-  m_Name: TestDish1
+  m_Name: Dish-Mandrake_stirfry
   m_EditorClassIdentifier: 
-  Name: TestDish1
-  Description: Test Dish 1 Description
-  Image: {fileID: 2800000, guid: 2897ea52167ec61459a4076b176fd294, type: 3}
+  Name: Mandrake Stirfry
+  Description: Infused with healing properties from the mandrake root, this is a
+    rather rejuvenating dish, so long as one doesn't pay too much attention to the
+    root's mangled mid-screaming face...
+  Image: {fileID: 2800000, guid: db1c5a4fa9e0e7d4f8e24e63b9b833ae, type: 3}
   goldOutput: 5

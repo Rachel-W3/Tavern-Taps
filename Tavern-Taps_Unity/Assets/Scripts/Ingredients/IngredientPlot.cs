@@ -34,7 +34,7 @@ public class IngredientPlot : MonoBehaviour
     {
         if (storedIngredient > 0)
         {
-            IngredientManager.Ingredients.addIngredient(storedIngredient, type);
+            IngredientManager.Instance.addIngredient(storedIngredient, type);
             storedIngredient = 0;
             return true;
         }

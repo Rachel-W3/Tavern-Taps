@@ -7,7 +7,7 @@ public class IngredientManager : MonoBehaviour
 {
     // Singleton
     private static IngredientManager ingredientManager;
-    public static IngredientManager Ingredients { get => ingredientManager; }
+    public static IngredientManager Instance { get => ingredientManager; }
 
     //Fields
     public enum IngredientTypes
@@ -31,8 +31,6 @@ public class IngredientManager : MonoBehaviour
     [SerializeField] private int Veggies_Amount;
     [SerializeField] private int Grain_Amount;
 
-    public List<Dish> Dishes;
-
     //Properties
     public int DairyMeatAmt { get => DairyMeat_Amount; }
     public int VeggiesAmt { get => Veggies_Amount; }
@@ -42,16 +40,6 @@ public class IngredientManager : MonoBehaviour
     {
         if (ingredientManager == null)
             ingredientManager = this; 
-    }
-
-    private void OnGUI()
-    {
-        string DishString = "";
-
-        foreach(Dish dish in Dishes)
-            DishString += "\n" + dish.Name;
-        
-        GUI.Box(new Rect(Screen.width * 2/3, Screen.width/4, Screen.width/3, Screen.height/2), "Dairy/Meat: " + DairyMeat_Amount + "\nVeggies: " + Veggies_Amount + "\nGrain: " + Grain_Amount + "\n\nDishes:" + DishString);
     }
 
     //Add Ingredients
@@ -177,5 +165,10 @@ public class IngredientManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private void OnGUI()
+    {
+        GUI.Box(new Rect(Screen.width * 2 / 3, Screen.width / 2, Screen.width / 3, Screen.height / 4), "Dairy / Meat: " + DairyMeat_Amount + "\nVeggies: " + Veggies_Amount + "\nGrain: " + Grain_Amount);
     }
 }
