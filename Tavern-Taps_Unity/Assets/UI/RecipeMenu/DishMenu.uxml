@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="DarkOverlay" focusable="true" style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, 255); opacity: 0.4;" />
+    <ui:VisualElement name="DarkOverlay" focusable="true" style="width: 100%; height: 100%; background-color: rgb(0, 0, 0); opacity: 0.4;" />
     <ui:VisualElement name="DishMenu" style="position: absolute; width: 100%; height: 100%;">
         <ui:VisualElement name="DishContainer" style="height: 80%; width: 80%; position: absolute; left: 10%; top: 10%;">
             <ui:Label text="Default Dish" display-tooltip-when-elided="true" name="DishName" style="align-items: auto; -unity-text-align: upper-center; font-size: 28px; padding-bottom: 2%;" />
@@ -7,10 +7,10 @@
             <ui:VisualElement name="IngredientsNeeded" style="height: 10%; padding-top: 2%; padding-bottom: 2%;" />
             <ui:VisualElement name="Stats" style="height: 10%; padding-top: 2%; padding-bottom: 2%;" />
             <ui:Label text="This is default text, if you see it something has gone wrong" display-tooltip-when-elided="true" name="Description" style="font-size: 16px; white-space: normal;" />
+            <ui:Button text="Cook" display-tooltip-when-elided="true" name="CookButton" style="position: relative; border-top-left-radius: 10%; border-bottom-left-radius: 10%; border-top-right-radius: 10%; border-bottom-right-radius: 10%; height: 10%; top: auto; left: auto; width: 100%;" />
         </ui:VisualElement>
         <ui:Button text="&gt;" display-tooltip-when-elided="true" name="NextRecipe" style="position: absolute; top: 30%; left: 90%; height: 30%; width: 10%;" />
         <ui:Button text="&lt;" display-tooltip-when-elided="true" name="PrevRecipe" style="position: absolute; top: 30%; left: auto; height: 30%; width: 10%; right: 90%;" />
-        <ui:Button text="Cook" display-tooltip-when-elided="true" name="CookButton" style="position: absolute; border-top-left-radius: 100%; border-bottom-left-radius: 100%; border-top-right-radius: 100%; border-bottom-right-radius: 100%; height: 9%; top: 184px; left: 186px; width: 16%;" />
         <ui:Button text="X" display-tooltip-when-elided="true" name="ExitButton" style="position: absolute; top: auto; left: 87.5%; height: 6.75%; width: 12%; bottom: 87.5%;" />
     </ui:VisualElement>
 </ui:UXML>

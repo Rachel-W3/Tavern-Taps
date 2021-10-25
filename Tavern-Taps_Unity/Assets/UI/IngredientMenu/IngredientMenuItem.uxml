@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="IngredientMenuItem" style="width: 100%; height: 100%; background-color: rgb(255, 177, 95);">
+        <ui:Label text="Default Ingredient" display-tooltip-when-elided="true" name="IngredientName" style="-unity-text-align: upper-center; color: rgb(0, 0, 0); height: 10%; width: 100%;" />
+        <ui:Button display-tooltip-when-elided="true" name="IngredientImage" style="position: relative; width: 100%; height: 90%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; background-color: rgb(255, 177, 95); background-image: url(&apos;/Assets/Images/Ingredients/ingredient placeholder.png&apos;); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0;" />
+    </ui:VisualElement>
+</ui:UXML>
