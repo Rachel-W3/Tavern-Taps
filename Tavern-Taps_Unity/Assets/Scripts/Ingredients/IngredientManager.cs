@@ -40,7 +40,15 @@ public class IngredientManager : MonoBehaviour
     //Check if there are ingredients
     public bool checkIngredient(int amt, Ingredient ingredient)
     {
-        return false;
+        int ingredientCnt = 0;
+
+        foreach(Ingredient x in ingredientInventory)
+        {
+            if (x.ingredientName == ingredient.ingredientName)
+                ingredientCnt++;
+        }
+
+        return ingredientCnt >= amt;
     }
 
 

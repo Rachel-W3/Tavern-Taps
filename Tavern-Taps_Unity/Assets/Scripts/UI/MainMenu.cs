@@ -15,6 +15,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject TavernUI;
     [SerializeField] private GameObject MapUI;
 
+    
+
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -107,5 +109,12 @@ public class MainMenu : MonoBehaviour
             uiScript = gameObject.GetComponent<RecipeMenu>();
             uiScript.refreshUI();
         }
+    }
+
+    public static void updateMoneyUI(int amt)
+    {
+        var root = GameObject.Find("NavigationMenu").GetComponent<UIDocument>().rootVisualElement;
+        var moneyLabel = root.Q<Label>("MoneyLabel");
+        moneyLabel.text = "Money: " + amt;
     }
 }

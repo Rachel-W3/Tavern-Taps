@@ -23,7 +23,7 @@ public class TavernManager : MonoBehaviour
     private Dictionary<Vector2, GameObject> seatingChart; // Key : Value = seatPosition : NPC occupant
 
     // Properties
-    public int Gold { get => gold; set => gold = value; }
+    public int Gold { get => gold; set => setGold(value); }
     public Dictionary<Vector2, GameObject> SeatingChart { get => seatingChart; }
 
     private void Awake()
@@ -48,9 +48,9 @@ public class TavernManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void setGold(int amt)
     {
-        
+        gold = amt;
+        MainMenu.updateMoneyUI(amt);
     }
 }

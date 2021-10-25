@@ -7,7 +7,7 @@
         <ui:VisualElement name="DishMenu" style="position: absolute; width: 100%; height: 100%;">
             <ui:VisualElement name="DishContainer" style="height: 80%; width: 80%; position: absolute; left: 10%; top: 10%;">
                 <ui:Label text="Default Dish" display-tooltip-when-elided="true" name="DishName" style="align-items: auto; -unity-text-align: upper-center; font-size: 28px; padding-bottom: 2%;" />
-                <ui:VisualElement name="DishImage" style="background-image: url(&apos;/Assets/Images/meal placeholder.png&apos;); width: 100%; height: 30%; padding-top: 2%; padding-bottom: 2%;" />
+                <ui:VisualElement name="DishImage" style="background-image: url(&apos;/Assets/Images/Meals/meal placeholder.png&apos;); width: 100%; height: 30%; padding-top: 2%; padding-bottom: 2%;" />
                 <ui:VisualElement name="IngredientsNeeded" style="height: 10%; padding-top: 2%; padding-bottom: 2%;" />
                 <ui:VisualElement name="Stats" style="height: 10%; padding-top: 2%; padding-bottom: 2%;" />
                 <ui:Label text="This is default text, if you see it something has gone wrong" display-tooltip-when-elided="true" name="Description" style="font-size: 16px; white-space: normal;" />
