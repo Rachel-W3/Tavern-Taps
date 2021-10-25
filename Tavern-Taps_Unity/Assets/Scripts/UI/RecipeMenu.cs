@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 public class RecipeMenu : MonoBehaviour
 {
     private List<Recipe> recipes = new List<Recipe>();
-    private int DishIndex = 0;
+    private int recipeIndex = 0;
     [SerializeField] private VisualTreeAsset recipeTemplate;
 
     public void Start()
@@ -37,7 +37,7 @@ public class RecipeMenu : MonoBehaviour
         PrevRecipeButton.clicked += prevRecipe;
 
         var DishCookButton = root.Q<Button>("CookButton");
-        DishCookButton.clicked += () => recipes[DishIndex].Cook();
+        DishCookButton.clicked += () => recipes[recipeIndex].Cook();
 
         //Hide the dish menu
         var DishMenu = root.Q<VisualElement>("DishMenu");
@@ -69,21 +69,21 @@ public class RecipeMenu : MonoBehaviour
 
     private void nextRecipe()
     {
-        DishIndex += 1;
-        if (DishIndex >= recipes.Count)
-            DishIndex = 0;
+        recipeIndex += 1;
+        if (recipeIndex >= recipes.Count)
+            recipeIndex = 0;
 
-        showDishMenu(recipes[DishIndex]);
+        showDishMenu(recipes[recipeIndex]);
 
     }
 
     private void prevRecipe()
     {
-        DishIndex -= 1;
-        if (DishIndex < 0)
-            DishIndex = recipes.Count - 1;
+        recipeIndex -= 1;
+        if (recipeIndex < 0)
+            recipeIndex = recipes.Count - 1;
 
-        showDishMenu(recipes[DishIndex]);
+        showDishMenu(recipes[recipeIndex]);
     }
 
     private void showDishMenu(Recipe recipe)
@@ -91,7 +91,7 @@ public class RecipeMenu : MonoBehaviour
         var root = GetComponent<UIDocument>().rootVisualElement;
         var DishMenu = root.Q<VisualElement>("DishMenu");
 
-        DishIndex = FindRecipeIndex(recipe);
+        recipeIndex = FindRecipeIndex(recipe);
 
         if (DishMenu.style.display == StyleKeyword.None)
         {
