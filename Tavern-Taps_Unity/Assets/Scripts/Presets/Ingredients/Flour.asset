@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: def5c942843b5a545a10f094f401a6ba, type: 3}
+  m_Name: Flour
+  m_EditorClassIdentifier: 
+  ingredientName: Flour
+  description: A powder made from grinding raw grains, beans, nuts, or seeds. Often
+    used as a main base for baking goods or as a thickener in soups and sauces.
+  image: {fileID: 2800000, guid: 5eebe93e15203f540b340303de9d2988, type: 3}
+  rarity: 1
