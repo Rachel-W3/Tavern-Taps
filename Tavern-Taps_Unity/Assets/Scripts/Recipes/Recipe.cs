@@ -34,8 +34,14 @@ public class Recipe : ScriptableObject
             {
                 IngredientManager.Instance.removeIngredient(Ingredient.Amount, Ingredient.Type);
             }
-
-            TavernManager.Instance.Dishes.Add(FinishedProduct);
+            if(TavernManager.Instance.Dishes.ContainsKey(FinishedProduct))
+            {
+                TavernManager.Instance.Dishes[FinishedProduct]++;
+            }
+            else
+            {
+                TavernManager.Instance.Dishes.Add(FinishedProduct, 1);
+            }
         }
     }
 }

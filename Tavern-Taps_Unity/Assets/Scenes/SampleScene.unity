@@ -1608,7 +1608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59652e161c8d3a847875143959d9473d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dishes: []
   bar: {fileID: 1020375239}
 --- !u!1001 &2063727807
 PrefabInstance:

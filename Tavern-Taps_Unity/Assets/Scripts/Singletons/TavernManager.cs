@@ -23,7 +23,7 @@ public class TavernManager : MonoBehaviour
     private List<Vector2>                   seatPositions; // Might make it easier for adding new seats down the line
     private Dictionary<Vector2, GameObject> seatingChart; // Key : Value = seatPosition : NPC occupant
     // Dish display
-    public List<Dish>                       Dishes;
+    public Dictionary<Dish, int>            Dishes;
     [SerializeField] private GameObject     bar;
 
     // Properties
@@ -34,8 +34,11 @@ public class TavernManager : MonoBehaviour
     {
         // Initializing singleton
         if (instance == null) instance = this;
+        // Seating
         seatPositions = new List<Vector2>();
         seatingChart = new Dictionary<Vector2, GameObject>();
+        // Dishes
+        Dishes = new Dictionary<Dish, int>();
     }
 
     // Start is called before the first frame update
@@ -67,9 +70,9 @@ public class TavernManager : MonoBehaviour
     {
         string DishString = "";
 
-        foreach (Dish dish in Dishes)
-            DishString += "\n" + dish.Name;
+        foreach (KeyValuePair<Dish, int> dish in Dishes)
+            DishString += "\n" + dish.Key.Name + ": " + dish.Value;
 
-        GUI.Box(new Rect(Screen.width * 2 / 3, Screen.width / 4, Screen.width / 3, Screen.height / 4), "\nDishes:" + DishString);
+        GUI.Box(new Rect(Screen.width / 2, Screen.width / 4, Screen.width / 2, Screen.height / 8), "\nDishes:" + DishString);
     }
 }
