@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
     private GAME_STATE gameState;
     [SerializeField] private GameObject FarmUI;
     [SerializeField] private GameObject TavernUI;
-    [SerializeField] private GameObject MapUI; 
+    [SerializeField] private GameObject MapUI;
 
     void Start()
     {
