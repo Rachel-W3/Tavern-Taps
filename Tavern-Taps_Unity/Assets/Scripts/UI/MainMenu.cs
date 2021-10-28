@@ -10,13 +10,16 @@ public class MainMenu : MonoBehaviour
         FARM, TAVERN, MAP
     }
 
+    private GAME_STATE gameState;
     [SerializeField] private GameObject FarmUI;
     [SerializeField] private GameObject TavernUI;
-    [SerializeField] private GameObject MapUI;
+    [SerializeField] private GameObject MapUI; 
 
     void Start()
     { 
         var root = GetComponent<UIDocument>().rootVisualElement;
+
+        ChangeGameState(GAME_STATE.TAVERN);
 
         var FarmButton = root.Q<Button>("FarmButton");
         FarmButton.clicked += () => ChangeGameState(GAME_STATE.FARM);
@@ -35,41 +38,74 @@ public class MainMenu : MonoBehaviour
         {
             
             case GAME_STATE.FARM:
-                ShowObject(FarmUI);
-                HideObject(MapUI);
-                HideObject(TavernUI);
+                if (gameState != GAME_STATE.FARM)
+                { 
+                    ShowObject(FarmUI);
+                    //HideObject(MapUI);
+                    HideObject(TavernUI);
+                    gameState = GAME_STATE.FARM;
+                }
                 break;
 
             case GAME_STATE.TAVERN:
-                ShowObject(TavernUI);
-                HideObject(MapUI);
-                HideObject(FarmUI);
+                if (gameState != GAME_STATE.TAVERN)
+                { 
+                    ShowObject(TavernUI);
+                    //HideObject(MapUI);
+                    HideObject(FarmUI);
+                    gameState = GAME_STATE.TAVERN;
+                }
                 break;
 
             case GAME_STATE.MAP:
-                ShowObject(MapUI);
-                HideObject(FarmUI);
-                HideObject(TavernUI);
+                if (gameState != GAME_STATE.MAP)
+                {
+                    //ShowObject(MapUI);
+                    HideObject(FarmUI);
+                    HideObject(TavernUI);
+                    gameState = GAME_STATE.MAP;
+                }
                 break;
 
             default:
                 break;
         }
-
-        Debug.Log(state);
     }
+
 
     private void HideObject(GameObject gameObject)
     {
-        Renderer rend = gameObject.GetComponent<Renderer>();
+        Canvas canvas;
+        UIDocument uiDoc;
 
-        rend.enabled = false;        
-    }
+        if ( canvas = gameObject.GetComponent<Canvas>() )
+        {
+            canvas.enabled = false;
+        }
+
+        if (uiDoc = gameObject.GetComponent<UIDocument>())
+        {
+            uiDoc.enabled = false;
+        }
+
+    }   
 
     private void ShowObject(GameObject gameObject)
     {
-        Renderer rend = gameObject.GetComponent<Renderer>();
+        Canvas canvas;
+        UIDocument uiDoc;
+        RecipeMenu uiScript;
 
-        rend.enabled = true;
+        if ( canvas = gameObject.GetComponent<Canvas>() )
+        {
+            canvas.enabled = true;
+        }
+
+        if (uiDoc = gameObject.GetComponent<UIDocument>())
+        {
+            uiDoc.enabled = true;
+            uiScript = gameObject.GetComponent<RecipeMenu>();
+            uiScript.refreshUI();
+        }
     }
 }
