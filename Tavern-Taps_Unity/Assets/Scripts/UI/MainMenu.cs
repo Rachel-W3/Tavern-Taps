@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject MapUI;
 
     void Start()
-    {
+    { 
         var root = GetComponent<UIDocument>().rootVisualElement;
 
         ChangeGameState(GAME_STATE.TAVERN);
