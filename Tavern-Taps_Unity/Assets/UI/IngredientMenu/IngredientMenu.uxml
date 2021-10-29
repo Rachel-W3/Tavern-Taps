@@ -1,0 +1,22 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Label text="Ingredients" display-tooltip-when-elided="true" name="IngredientMenuLabel" style="-unity-text-align: upper-center; font-size: 30px; height: 7%;" />
+    <ui:ScrollView name="IngredientMenu" style="flex-direction: row; flex-wrap: wrap; width: 100%; height: 83%;">
+        <ui:VisualElement name="ingredientsContainer" style="height: 100%; flex-direction: row; flex-wrap: wrap;" />
+    </ui:ScrollView>
+    <ui:VisualElement name="IngredientView" style="height: 100%; position: absolute; width: 100%;">
+        <ui:VisualElement name="DarkOverlay" focusable="true" style="width: 100%; height: 100%; background-color: rgb(0, 0, 0); opacity: 0.4;" />
+        <ui:VisualElement name="IngredientMenu" style="position: absolute; width: 100%; height: 100%;">
+            <ui:VisualElement name="IngredientContainer" style="height: 80%; width: 80%; position: absolute; left: 10%; top: 10%;">
+                <ui:Label text="Default Ingredient" display-tooltip-when-elided="true" name="IngredientViewName" style="align-items: auto; -unity-text-align: upper-center; font-size: 28px; padding-bottom: 2%;" />
+                <ui:VisualElement name="IngredientImage" style="background-image: url(&apos;/Assets/Images/Ingredients/ingredient placeholder.png&apos;); width: 100%; height: 30%; padding-top: 2%; padding-bottom: 2%;" />
+                <ui:VisualElement name="IngredientQtyContainer" style="height: 12%; width: 20%; left: 80%; bottom: 5%; background-color: rgb(231, 195, 101); border-top-left-radius: 100%; border-bottom-left-radius: 100%; border-top-right-radius: 100%; border-bottom-right-radius: 100%; border-left-width: 3px; border-right-width: 3px; border-top-width: 3px; border-bottom-width: 3px;">
+                    <ui:Label text="0" display-tooltip-when-elided="true" name="IngredientQty" style="-unity-text-align: middle-center; color: rgb(0, 0, 0); font-size: 20px; width: 100%; height: 100%;" />
+                </ui:VisualElement>
+                <ui:Label text="This is default text, if you see it something has gone wrong" display-tooltip-when-elided="true" name="Description" style="font-size: 16px; white-space: normal; top: 5%;" />
+            </ui:VisualElement>
+            <ui:Button text="&gt;" display-tooltip-when-elided="true" name="NextIngredient" style="position: absolute; top: 30%; left: 90%; height: 30%; width: 10%;" />
+            <ui:Button text="&lt;" display-tooltip-when-elided="true" name="PrevIngredient" style="position: absolute; top: 30%; left: auto; height: 30%; width: 10%; right: 90%;" />
+            <ui:Button text="X" display-tooltip-when-elided="true" name="ExitButton" style="position: absolute; top: auto; left: 87.5%; height: 6.75%; width: 12%; bottom: 87.5%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
