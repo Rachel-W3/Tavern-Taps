@@ -32,7 +32,7 @@ public class Recipe : ScriptableObject
         {
             foreach (IngredientAmounts Ingredient in RequiredIngredients)
             {
-                IngredientManager.Ingredients.removeIngredient(Ingredient.amount, Ingredient.ingredient);
+                IngredientManager.Ingredients.removeIngredient(Ingredient.ingredient, Ingredient.amount);
             }
 
             IngredientManager.Ingredients.Dishes.Add(FinishedProduct);

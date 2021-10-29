@@ -5,12 +5,14 @@ using UnityEngine.UIElements;
 
 public class IngredientMenu : MonoBehaviour
 {
-    private List<Ingredient> ingredients = new List<Ingredient>();
+    public List<KeyValuePair<Ingredient, int>> ingredients;
     [SerializeField] private VisualTreeAsset ingredientTemplate;
     private int ingredientIndex = 0;
 
     public void Start()
     {
+        ingredients = IngredientManager.Ingredients.ingredientInventory;
+
         var root = GetComponent<UIDocument>().rootVisualElement;
 
         //Hide the ingredient menu label
@@ -24,6 +26,7 @@ public class IngredientMenu : MonoBehaviour
 
     public void refreshUI()
     {
+        
         var root = GetComponent<UIDocument>().rootVisualElement;
         var ingredientContainer = root.Q<VisualElement>("ingredientsContainer");
 
@@ -42,17 +45,17 @@ public class IngredientMenu : MonoBehaviour
         ingredientView.style.display = StyleKeyword.None;
 
         //For each unique ingredient in the ingredient inventory, create a recipe menu item and add it to the container
-        foreach (Ingredient ingredient in ingredients)
+        foreach (KeyValuePair<Ingredient, int> ingredient in ingredients)
         {
             ingredientTemplate.CloneTree(ingredientContainer);
 
             //Set the name and image of the newly created menu item
             var ingredientName = ingredientContainer.Query<Label>().Last();
-            ingredientName.text = ingredient.ingredientName;
+            ingredientName.text = ingredient.Key.ingredientName;
 
             var ingredientButton = ingredientContainer.Query<Button>().Last();
-            ingredientButton.style.backgroundImage = ingredient.image;
-            ingredientButton.clicked += () => showIngredientView(ingredient);
+            ingredientButton.style.backgroundImage = ingredient.Key.image;
+            ingredientButton.clicked += () => showIngredientView(ingredient.Key, ingredient.Value);
 
         }
 
@@ -64,8 +67,7 @@ public class IngredientMenu : MonoBehaviour
         if (ingredientIndex >= ingredients.Count)
             ingredientIndex = 0;
 
-        showIngredientView(ingredients[ingredientIndex]);
-
+        showIngredientView(ingredients[ingredientIndex].Key, ingredients[ingredientIndex].Value);
     }
 
     private void prevIngredient()
@@ -74,10 +76,10 @@ public class IngredientMenu : MonoBehaviour
         if (ingredientIndex < 0)
             ingredientIndex = ingredients.Count - 1;
 
-        showIngredientView(ingredients[ingredientIndex]);
+        showIngredientView(ingredients[ingredientIndex].Key, ingredients[ingredientIndex].Value);
     }
 
-    private void showIngredientView(Ingredient ingredient)
+    private void showIngredientView(Ingredient ingredient, int qty)
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
         var ingredientView = root.Q<VisualElement>("IngredientView");
@@ -89,21 +91,23 @@ public class IngredientMenu : MonoBehaviour
             ingredientView.style.display = StyleKeyword.Initial;
         }
 
-        var ingredientName = root.Q<Label>("IngredientName");
+        var ingredientName = root.Q<Label>("IngredientViewName");
         ingredientName.text = ingredient.ingredientName;
 
         var ingredientImage = root.Q<VisualElement>("IngredientImage");
-
         ingredientImage.style.backgroundImage = ingredient.image;
 
         var ingredientDescripton = root.Q<Label>("Description");
         ingredientDescripton.text = ingredient.description;
+
+        var ingredientQty = root.Q<Label>("IngredientQty");
+        ingredientQty.text = qty.ToString();
     }
 
     private void hideIngredientView()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
-        var ingredientView = root.Q<VisualElement>("ingredientView");
+        var ingredientView = root.Q<VisualElement>("IngredientView");
         ingredientView.style.display = StyleKeyword.None;
     }
 
@@ -112,9 +116,10 @@ public class IngredientMenu : MonoBehaviour
         int index = 0;
         for (; index < ingredients.Count; index++)
         {
-            if (ingredients[index].ingredientName == ingredient.ingredientName)
+            if (ingredients[index].Key.ingredientName == ingredient.ingredientName)
                 return index;
         }
         return -1;
     }
+    
 }

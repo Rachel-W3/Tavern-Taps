@@ -18,7 +18,7 @@ public class IngredientManager : MonoBehaviour
     [SerializeField] private Ingredient[] animalList;
     [SerializeField] private Ingredient[] processList;
 
-    public List<Ingredient> ingredientInventory = new List<Ingredient>();
+    [SerializeField] public List<KeyValuePair<Ingredient, int>> ingredientInventory = new List<KeyValuePair<Ingredient, int>>();
     public List<Dish> Dishes;
 
 
@@ -30,33 +30,54 @@ public class IngredientManager : MonoBehaviour
 
 
     //Add Ingredients
-    public void addIngredient(int amt, Ingredient ingredient)
+    public void addIngredient(Ingredient ingredient, int amt)
     {
-        for (int i = 0; i < amt; i++)
-            ingredientInventory.Add(ingredient);
+        int newValue; 
+        for(int i = 0; i < ingredientInventory.Count; i++)
+        {
+            KeyValuePair<Ingredient, int> kvp = ingredientInventory[i];
+            if(kvp.Key.ingredientName == ingredient.ingredientName) 
+            {
+                newValue = kvp.Value + amt;
+                ingredientInventory.Remove(kvp);
+                ingredientInventory.Add(new KeyValuePair<Ingredient, int>(ingredient, newValue));
+                return;
+            }
+        }
+        ingredientInventory.Add(new KeyValuePair<Ingredient, int>(ingredient, amt));
     }
 
 
     //Check if there are ingredients
     public bool checkIngredient(int amt, Ingredient ingredient)
     {
-        int ingredientCnt = 0;
 
-        foreach(Ingredient x in ingredientInventory)
+        foreach(KeyValuePair<Ingredient, int> x in ingredientInventory)
         {
-            if (x.ingredientName == ingredient.ingredientName)
-                ingredientCnt++;
+            if (x.Key.ingredientName == ingredient.ingredientName)
+                return x.Value >= amt;
         }
 
-        return ingredientCnt >= amt;
+        return false; 
+        
     }
 
 
     //Remove Ingredients
-    public void removeIngredient(int amt, Ingredient ingredient)
+    public void removeIngredient(Ingredient ingredient, int amt)
     {
-        for (int i = 0; i < amt; i++)
-            ingredientInventory.Remove(ingredient);
+        int newValue;
+        for(int i = 0; i < ingredientInventory.Count; i++)
+        {
+            KeyValuePair<Ingredient, int> kvp = ingredientInventory[i];
+            if (kvp.Key.ingredientName == ingredient.ingredientName)
+            {
+                newValue = kvp.Value - amt;
+                ingredientInventory.Remove(kvp);
+                ingredientInventory.Add(new KeyValuePair<Ingredient, int>(ingredient, newValue));
+            }
+                        
+        }
     }
 
     //Add a random ingredient from an ingredient list;
@@ -87,8 +108,7 @@ public class IngredientManager : MonoBehaviour
                     probabilityCursor += animal.rarity;
                     if (probabilityCursor >= probabilityTarget)
                     {
-                        Debug.Log("Adding... " + animal.ingredientName);
-                        ingredientInventory.Add(animal);
+                        addIngredient(animal, 1);
                         return;
                     }
                     
@@ -107,8 +127,8 @@ public class IngredientManager : MonoBehaviour
                 {
                     probabilityCursor += crop.rarity;
                     if (probabilityCursor >= probabilityTarget)
-                    { 
-                        ingredientInventory.Add(crop);
+                    {
+                        addIngredient(crop, 1);
                         return;
                     }
                 }
@@ -127,7 +147,7 @@ public class IngredientManager : MonoBehaviour
                     probabilityCursor += process.rarity;
                     if (probabilityCursor >= probabilityTarget)
                     {
-                        ingredientInventory.Add(process);
+                        addIngredient(process, 1);
                         return;
                     }
                 }

@@ -15,6 +15,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject TavernUI;
     [SerializeField] private GameObject MapUI;
 
+    [SerializeField] private GameObject IngredientOverlay;
+    [SerializeField] private GameObject RecipeOverlay;
+
     
 
     void Start()
@@ -32,10 +35,16 @@ public class MainMenu : MonoBehaviour
         var MapButton = root.Q<Button>("MapButton");
         MapButton.clicked += () => ChangeGameState(GAME_STATE.MAP);
 
+        var IngredientButton = root.Q<Button>("IngredientButton");
+        IngredientButton.clicked += () => showIngredientOverlay();
+
     }
 
     private void ChangeGameState(GAME_STATE state)
     {
+
+        hideAllOverlays();
+
         switch(state)
         {
             
@@ -90,7 +99,23 @@ public class MainMenu : MonoBehaviour
             uiDoc.enabled = false;
         }
 
-    }   
+    }
+
+    private void hideIngredientOverlay()
+    {
+        HideObject(IngredientOverlay);
+    }
+
+    private void hideRecipeOverlay()
+    {
+        HideObject(RecipeOverlay);
+    }
+
+    private void hideAllOverlays()
+    {
+        hideIngredientOverlay();
+        hideRecipeOverlay();
+    }
 
     private void ShowObject(GameObject gameObject)
     {
@@ -106,9 +131,24 @@ public class MainMenu : MonoBehaviour
         if (uiDoc = gameObject.GetComponent<UIDocument>())
         {
             uiDoc.enabled = true;
-            uiScript = gameObject.GetComponent<RecipeMenu>();
-            uiScript.refreshUI();
+            uiScript = gameObject.GetComponent<RecipeMenu>(); //This line needs to be replaced to keep the code expandable 
+            if(uiScript)
+                uiScript.refreshUI();
         }
+    }
+
+    private void showIngredientOverlay()
+    {
+        hideAllOverlays();
+        ShowObject(IngredientOverlay);
+        IngredientMenu ingredientMenu = IngredientOverlay.GetComponent<IngredientMenu>();
+        ingredientMenu.refreshUI();
+    }
+
+    private void showRecipeOverlay()
+    {
+        hideAllOverlays();
+        ShowObject(IngredientOverlay);
     }
 
     public static void updateMoneyUI(int amt)
