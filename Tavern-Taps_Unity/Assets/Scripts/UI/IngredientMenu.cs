@@ -12,12 +12,6 @@ public class IngredientMenu : MonoBehaviour
     public void Start()
     {
         ingredients = IngredientManager.Ingredients.ingredientInventory;
-
-        var root = GetComponent<UIDocument>().rootVisualElement;
-
-        //Hide the ingredient view
-        var ingredientView = root.Q<VisualElement>("IngredientView");
-        ingredientView.style.display = StyleKeyword.None;
     }
 
     public void refreshUI()
