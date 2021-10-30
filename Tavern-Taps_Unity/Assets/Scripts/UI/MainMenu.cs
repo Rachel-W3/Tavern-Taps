@@ -52,7 +52,7 @@ public class MainMenu : MonoBehaviour
                 if (gameState != GAME_STATE.FARM)
                 { 
                     ShowObject(FarmUI);
-                    //HideObject(MapUI);
+                    HideObject(MapUI);
                     HideObject(TavernUI);
                     gameState = GAME_STATE.FARM;
                 }
@@ -62,7 +62,7 @@ public class MainMenu : MonoBehaviour
                 if (gameState != GAME_STATE.TAVERN)
                 { 
                     ShowObject(TavernUI);
-                    //HideObject(MapUI);
+                    HideObject(MapUI);
                     HideObject(FarmUI);
                     gameState = GAME_STATE.TAVERN;
                 }

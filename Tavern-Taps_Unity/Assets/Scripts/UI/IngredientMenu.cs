@@ -15,10 +15,6 @@ public class IngredientMenu : MonoBehaviour
 
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        //Hide the ingredient menu label
-        var ingredientMenuLabel = root.Q<Label>("IngredientMenuLabel");
-        ingredientMenuLabel.style.display = StyleKeyword.None;
-
         //Hide the ingredient view
         var ingredientView = root.Q<VisualElement>("IngredientView");
         ingredientView.style.display = StyleKeyword.None;

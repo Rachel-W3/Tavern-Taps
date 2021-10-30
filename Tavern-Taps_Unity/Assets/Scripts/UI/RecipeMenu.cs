@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-
 public class RecipeMenu : MonoBehaviour
 {
     private List<Recipe> recipes = new List<Recipe>();
