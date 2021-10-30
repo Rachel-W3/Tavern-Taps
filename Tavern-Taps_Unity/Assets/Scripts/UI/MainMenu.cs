@@ -71,7 +71,7 @@ public class MainMenu : MonoBehaviour
             case GAME_STATE.MAP:
                 if (gameState != GAME_STATE.MAP)
                 {
-                    //ShowObject(MapUI);
+                    ShowObject(MapUI);
                     HideObject(FarmUI);
                     HideObject(TavernUI);
                     gameState = GAME_STATE.MAP;
