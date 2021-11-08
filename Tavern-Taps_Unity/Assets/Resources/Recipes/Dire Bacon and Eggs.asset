@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66bab2ddca74a4947936ada5ea884beb, type: 3}
-  m_Name: TestRecipe2
+  m_Name: Dire Bacon and Eggs
   m_EditorClassIdentifier: 
   RequiredIngredients:
-  - Type: 0
-    Amount: 1
-  - Type: 1
-    Amount: 1
-  - Type: 2
-    Amount: 1
-  FinishedProduct: {fileID: 11400000, guid: 6849e93992c255d469269eb3bbb408b8, type: 2}
+  - ingredient: {fileID: 11400000, guid: 5c417fd0dbe623f498b8e9e267dbe60c, type: 2}
+    amount: 1
+  - ingredient: {fileID: 11400000, guid: 42cae113c5e512a4a85682c03ebdef31, type: 2}
+    amount: 1
+  FinishedProduct: {fileID: 11400000, guid: 3af48011120134944bac0d17b2c6f93e, type: 2}

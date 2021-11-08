@@ -8,14 +8,14 @@ public class IngredientPlot : MonoBehaviour
     //Fields
     public Button plotButton;
     [SerializeField] string plotName;
-    [SerializeField] IngredientManager.IngredientTypes type;
+    [SerializeField] IngredientManager.IngredientType type;
     [SerializeField] static float growthRate = 1.0f;
     [SerializeField] int growthAmount = 1;
     [SerializeField] int ingredientCapacity = 100;
     [SerializeField] private int storedIngredient = 0;
 
     //Properties
-    public IngredientManager.IngredientTypes Type { get => type; }
+    public IngredientManager.IngredientType Type { get => type; }
     public float GrowthRate { get => growthRate; set => growthRate = value; }
     public int GrowthAmount { get => growthAmount; set => growthAmount = value; }
     public int IngredientCapacity { get => ingredientCapacity; set => ingredientCapacity = value; }
@@ -30,15 +30,14 @@ public class IngredientPlot : MonoBehaviour
         StartCoroutine(createIngredient());
     }
 
-    public bool harvest()
+    public void harvest()
     {
-        if (storedIngredient > 0)
+        for (int i = 0; i < storedIngredient; i++)
         {
-            IngredientManager.Ingredients.addIngredient(storedIngredient, type);
-            storedIngredient = 0;
-            return true;
+            IngredientManager.Ingredients.addRandomIngredient(type);
         }
-        return false; 
+        storedIngredient = 0;
+
     }
 
     public void harvestOnClick()

@@ -1,7 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="MainMenuContainer" style="position: absolute; height: 10%; width: 100%; top: 90%; left: 0; flex-direction: row; flex-grow: 1; flex-shrink: 0;">
+    <ui:VisualElement name="NavigationContainer" style="position: absolute; height: 10%; width: 100%; top: 90%; left: 0; flex-direction: row; flex-grow: 1; flex-shrink: 0;">
         <ui:Button text="Farm" display-tooltip-when-elided="true" name="FarmButton" style="flex-grow: 1;" />
         <ui:Button text="Tavern" display-tooltip-when-elided="true" name="TavernButton" style="flex-grow: 1;" />
         <ui:Button text="Map" display-tooltip-when-elided="true" name="MapButton" style="flex-grow: 1;" />
     </ui:VisualElement>
+    <ui:Label text="Money: 0" display-tooltip-when-elided="true" name="MoneyLabel" style="-unity-text-align: upper-right; font-size: 16px;" />
+    <ui:Button text="Ing." display-tooltip-when-elided="true" name="IngredientButton" style="position: absolute; background-color: rgb(255, 90, 90); margin-left: 5%; margin-right: 5%; margin-top: 5%; margin-bottom: 5%; width: 8%; height: 4.5%; border-top-left-radius: 100%; border-bottom-left-radius: 100%; border-top-right-radius: 100%; border-bottom-right-radius: 100%; left: 75%; top: 10%;" />
 </ui:UXML>
