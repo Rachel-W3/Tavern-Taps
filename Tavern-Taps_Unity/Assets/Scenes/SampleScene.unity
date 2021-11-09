@@ -786,11 +786,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2653133052672050688, guid: 0e7452db8283d1743bac251b9ef3a069, type: 3}
       propertyPath: type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2653133052672050688, guid: 0e7452db8283d1743bac251b9ef3a069, type: 3}
       propertyPath: plotName
       value: Crops
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653133052672050688, guid: 0e7452db8283d1743bac251b9ef3a069, type: 3}
+      propertyPath: growthAmount
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2653133052672050691, guid: 0e7452db8283d1743bac251b9ef3a069, type: 3}
       propertyPath: m_TargetGraphic
@@ -1346,7 +1350,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7c9563699edffb94f889cdd61f549559, type: 2}
   - {fileID: 11400000, guid: e15315da7ac834b48ba604636b28af61, type: 2}
   - {fileID: 11400000, guid: 1496a229bf04b6e47a9617e9ec9cac56, type: 2}
-  Dishes: []
 --- !u!4 &1488246125
 Transform:
   m_ObjectHideFlags: 0
@@ -1761,7 +1764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2653133052672050688, guid: 0e7452db8283d1743bac251b9ef3a069, type: 3}
       propertyPath: type
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2653133052672050688, guid: 0e7452db8283d1743bac251b9ef3a069, type: 3}
       propertyPath: plotName
@@ -2199,6 +2202,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 167449413}
     m_Modifications:
+    - target: {fileID: 105044475156367481, guid: 6fbf2ea9b769642418211bca27149579, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2118032903391030684, guid: 6fbf2ea9b769642418211bca27149579, type: 3}
       propertyPath: m_Name
       value: horizontal table
@@ -2293,6 +2300,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4019095297732530574, guid: 6fbf2ea9b769642418211bca27149579, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792128420671363628, guid: 6fbf2ea9b769642418211bca27149579, type: 3}
+      propertyPath: m_Type
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

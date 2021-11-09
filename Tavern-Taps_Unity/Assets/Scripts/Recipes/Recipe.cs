@@ -35,8 +35,7 @@ public class Recipe : ScriptableObject
                 IngredientManager.Ingredients.removeIngredient(Ingredient.ingredient, Ingredient.amount);
             }
 
-            IngredientManager.Ingredients.Dishes.Add(FinishedProduct);
-            Debug.Log("Number Of Dishes " + IngredientManager.Ingredients.Dishes.Count);
+            TavernManager.Instance.addDish(FinishedProduct);
         }
     }
 }

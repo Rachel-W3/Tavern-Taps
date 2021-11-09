@@ -27,7 +27,7 @@ public class TavernManager : MonoBehaviour
     [SerializeField] private GameObject     bar;
 
     // Properties
-    public int Gold { get => gold; set => gold = value; }
+    public int Gold { get => gold; set => setGold(value); }
     public Chair[] Chairs { get => chairs; }
 
     private void Awake()
@@ -46,5 +46,47 @@ public class TavernManager : MonoBehaviour
         // Initializing bar for dish display
         RectTransform barRT = (RectTransform)bar.transform;
         Debug.Log("Position: " + barRT.rect.width);
+    }
+
+    public void addDish(Dish dish)
+    {
+        if (Dishes.ContainsKey(dish))
+        {
+            Dishes[dish] += 1;
+            bar.GetComponent<Bar>().refresh();
+            return; 
+        }
+        Dishes.Add(dish, 1);
+        bar.GetComponent<Bar>().refresh();
+    }
+
+    public void removeDish(Dish dish)
+    {
+        if (Dishes.ContainsKey(dish))
+        {
+            Dishes[dish] -= 1;
+            if (Dishes[dish] <= 0)
+            {
+                Dishes.Remove(dish);
+                bar.GetComponent<Bar>().refresh();
+            }
+                
+        }
+    }
+    
+    public int getNumDishes()
+    {
+        int total = 0;
+
+        foreach (KeyValuePair<Dish, int> dish in Dishes)
+            total += dish.Value;
+
+        return total; 
+    }
+
+    private void setGold(int value)
+    {
+        gold = value;
+        MainMenu.updateMoneyUI(value);
     }
 }

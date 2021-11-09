@@ -19,8 +19,6 @@ public class IngredientManager : MonoBehaviour
     [SerializeField] private Ingredient[] processList;
 
     [SerializeField] public List<KeyValuePair<Ingredient, int>> ingredientInventory = new List<KeyValuePair<Ingredient, int>>();
-    public List<Dish> Dishes;
-
 
     private void Awake()
     {

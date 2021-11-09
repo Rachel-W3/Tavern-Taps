@@ -40,20 +40,30 @@ public class NPC : MonoBehaviour
         {
             satisfied = true;
             TavernManager.Instance.Gold += selectedDish.goldOutput;
-            Debug.Log("Gold: " + TavernManager.Instance.Gold);
             timer = 0.0f;
         }
     }
 
     void TakeFood()
     {
-        int numDishes = IngredientManager.Ingredients.Dishes.Count;
-
+        int numDishes = TavernManager.Instance.getNumDishes();
         if(numDishes > 0)
         {
-            // For now, NPCs just take the top-most dish. Will implement selections later on
-            selectedDish = IngredientManager.Ingredients.Dishes[0];
-            IngredientManager.Ingredients.Dishes.RemoveAt(0);
+            float selectionValue = Random.value;
+            //Simple Selection, needs to be changed
+            List<Dish> possibleDishes = new List<Dish>(TavernManager.Instance.Dishes.Keys);
+            if( possibleDishes.Count == 1 )
+                selectedDish = possibleDishes[0];
+            
+            else
+            {
+                if (selectionValue > .5f)
+                    selectedDish = possibleDishes[0];
+                else
+                    selectedDish = possibleDishes[1];
+            }
+
+            TavernManager.Instance.removeDish(selectedDish);
             eating = true;
         }
     }
