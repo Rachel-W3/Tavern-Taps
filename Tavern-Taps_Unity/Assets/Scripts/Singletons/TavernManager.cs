@@ -59,20 +59,4 @@ public class TavernManager : MonoBehaviour
         RectTransform barRT = (RectTransform)bar.transform;
         Debug.Log("Position: " + barRT.rect.width);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnGUI()
-    {
-        string DishString = "";
-
-        foreach (KeyValuePair<Dish, int> dish in Dishes)
-            DishString += "\n" + dish.Key.Name + ": " + dish.Value;
-
-        GUI.Box(new Rect(Screen.width / 2, Screen.width / 4, Screen.width / 2, Screen.height / 8), "\nDishes:" + DishString);
-    }
 }
