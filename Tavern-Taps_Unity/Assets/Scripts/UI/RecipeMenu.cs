@@ -10,14 +10,10 @@ public class RecipeMenu : MonoBehaviour
     private int DishIndex = 0;
     [SerializeField] private VisualTreeAsset recipeTemplate;
 
-    public void Start()
+    void Start()
     {
         //Load the values for all of the dishes
-        loadRecipes();
-
-        //Initially load in the UI
-        refreshUI();
-        
+        loadRecipes();   
     }
 
     public void refreshUI()

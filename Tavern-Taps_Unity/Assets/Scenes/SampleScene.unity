@@ -1179,6 +1179,7 @@ GameObject:
   - component: {fileID: 1020375242}
   - component: {fileID: 1020375241}
   - component: {fileID: 1020375243}
+  - component: {fileID: 1020375244}
   m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
@@ -1259,6 +1260,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bacon_n_eggs: {fileID: 1536258189}
   mandrake_stirfry: {fileID: 488618957}
+--- !u!114 &1020375244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020375239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1020375241}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1488246123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,10 +1341,11 @@ MonoBehaviour:
   animalList:
   - {fileID: 11400000, guid: 5c417fd0dbe623f498b8e9e267dbe60c, type: 2}
   - {fileID: 11400000, guid: a75cf15c380a1734ca94b2a11c584f86, type: 2}
+  - {fileID: 11400000, guid: 42cae113c5e512a4a85682c03ebdef31, type: 2}
   processList:
   - {fileID: 11400000, guid: 7c9563699edffb94f889cdd61f549559, type: 2}
   - {fileID: 11400000, guid: e15315da7ac834b48ba604636b28af61, type: 2}
-  - {fileID: 11400000, guid: e15315da7ac834b48ba604636b28af61, type: 2}
+  - {fileID: 11400000, guid: 1496a229bf04b6e47a9617e9ec9cac56, type: 2}
   Dishes: []
 --- !u!4 &1488246125
 Transform:
@@ -1390,6 +1436,7 @@ MonoBehaviour:
   MapUI: {fileID: 731669912}
   IngredientOverlay: {fileID: 1859532759}
   RecipeOverlay: {fileID: 2097385814}
+  recipeButton: {fileID: 1020375244}
 --- !u!1 &1741939951
 GameObject:
   m_ObjectHideFlags: 0

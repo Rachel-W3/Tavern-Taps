@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class MainMenu : MonoBehaviour
@@ -18,6 +19,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject IngredientOverlay;
     [SerializeField] private GameObject RecipeOverlay;
 
+    [SerializeField] private UnityEngine.UI.Button recipeButton;
+
     
 
     void Start()
@@ -26,17 +29,19 @@ public class MainMenu : MonoBehaviour
 
         ChangeGameState(GAME_STATE.TAVERN);
 
-        var FarmButton = root.Q<Button>("FarmButton");
+        var FarmButton = root.Q<UnityEngine.UIElements.Button>("FarmButton");
         FarmButton.clicked += () => ChangeGameState(GAME_STATE.FARM);
 
-        var TavernButton = root.Q<Button>("TavernButton");
+        var TavernButton = root.Q<UnityEngine.UIElements.Button>("TavernButton");
         TavernButton.clicked += () => ChangeGameState(GAME_STATE.TAVERN);
 
-        var MapButton = root.Q<Button>("MapButton");
+        var MapButton = root.Q<UnityEngine.UIElements.Button>("MapButton");
         MapButton.clicked += () => ChangeGameState(GAME_STATE.MAP);
 
-        var IngredientButton = root.Q<Button>("IngredientButton");
+        var IngredientButton = root.Q<UnityEngine.UIElements.Button>("IngredientButton");
         IngredientButton.clicked += () => showIngredientOverlay();
+
+        recipeButton.onClick.AddListener(showRecipeOverlay);
 
     }
 
@@ -127,7 +132,6 @@ public class MainMenu : MonoBehaviour
     {
         Canvas canvas;
         UIDocument uiDoc;
-        RecipeMenu uiScript;
         SpriteRenderer sprite;
 
         if ( canvas = gameObject.GetComponent<Canvas>() )
@@ -138,9 +142,6 @@ public class MainMenu : MonoBehaviour
         if ( uiDoc = gameObject.GetComponent<UIDocument>() )
         {
             uiDoc.enabled = true;
-            uiScript = gameObject.GetComponent<RecipeMenu>(); //This line needs to be replaced to keep the code expandable 
-            if(uiScript)
-                uiScript.refreshUI();
         }
 
         if (sprite = gameObject.GetComponent<SpriteRenderer>())
@@ -160,7 +161,9 @@ public class MainMenu : MonoBehaviour
     private void showRecipeOverlay()
     {
         hideAllOverlays();
-        ShowObject(IngredientOverlay);
+        ShowObject(RecipeOverlay);
+        RecipeMenu recipeMenu = RecipeOverlay.GetComponent<RecipeMenu>();
+        recipeMenu.refreshUI();
     }
 
     public static void updateMoneyUI(int amt)
