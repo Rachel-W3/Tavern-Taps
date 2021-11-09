@@ -19,24 +19,32 @@ public class TavernManager : MonoBehaviour
     // Fields
     private int                             gold;
     private int                             tavernLevel;
+    // Seating
     private List<Vector2>                   seatPositions; // Might make it easier for adding new seats down the line
     private Dictionary<Vector2, GameObject> seatingChart; // Key : Value = seatPosition : NPC occupant
+    // Dish display
+    public Dictionary<Dish, int>            Dishes;
+    [SerializeField] private GameObject     bar;
 
     // Properties
-    public int Gold { get => gold; set => setGold(value); }
+    public int Gold { get => gold; set => gold = value; }
     public Dictionary<Vector2, GameObject> SeatingChart { get => seatingChart; }
 
     private void Awake()
     {
         // Initializing singleton
         if (instance == null) instance = this;
+        // Seating
         seatPositions = new List<Vector2>();
         seatingChart = new Dictionary<Vector2, GameObject>();
+        // Dishes
+        Dishes = new Dictionary<Dish, int>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        // Initializing seating positions
         for(int i = -2; i <= 2; i++)
         {
             seatPositions.Add(new Vector2(i, -4));
@@ -46,11 +54,25 @@ public class TavernManager : MonoBehaviour
         {
             seatingChart.Add(pos, null);
         }
+
+        // Initializing bar for dish display
+        RectTransform barRT = (RectTransform)bar.transform;
+        Debug.Log("Position: " + barRT.rect.width);
     }
 
-    void setGold(int amt)
+    // Update is called once per frame
+    void Update()
     {
-        gold = amt;
-        MainMenu.updateMoneyUI(amt);
+        
+    }
+
+    private void OnGUI()
+    {
+        string DishString = "";
+
+        foreach (KeyValuePair<Dish, int> dish in Dishes)
+            DishString += "\n" + dish.Key.Name + ": " + dish.Value;
+
+        GUI.Box(new Rect(Screen.width / 2, Screen.width / 4, Screen.width / 2, Screen.height / 8), "\nDishes:" + DishString);
     }
 }

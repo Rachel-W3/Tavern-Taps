@@ -6,8 +6,8 @@ using UnityEngine;
 [Serializable]
 public struct IngredientAmounts
 {
-    public Ingredient ingredient;
-    [Range(1, 999)] public int amount;
+    public IngredientManager.IngredientTypes Type;
+    [Range(1, 999)] public int Amount;
 }
 
 [CreateAssetMenu]
@@ -20,7 +20,7 @@ public class Recipe : ScriptableObject
     {
         foreach (IngredientAmounts Ingredient in RequiredIngredients)
         {
-            if (!IngredientManager.Ingredients.checkIngredient(Ingredient.amount, Ingredient.ingredient))
+            if (!IngredientManager.Instance.checkIngredient(Ingredient.Amount, Ingredient.Type))
                 return false;
         }
         return true;
@@ -32,11 +32,16 @@ public class Recipe : ScriptableObject
         {
             foreach (IngredientAmounts Ingredient in RequiredIngredients)
             {
-                IngredientManager.Ingredients.removeIngredient(Ingredient.ingredient, Ingredient.amount);
+                IngredientManager.Instance.removeIngredient(Ingredient.Amount, Ingredient.Type);
             }
-
-            IngredientManager.Ingredients.Dishes.Add(FinishedProduct);
-            Debug.Log("Number Of Dishes " + IngredientManager.Ingredients.Dishes.Count);
+            if(TavernManager.Instance.Dishes.ContainsKey(FinishedProduct))
+            {
+                TavernManager.Instance.Dishes[FinishedProduct]++;
+            }
+            else
+            {
+                TavernManager.Instance.Dishes.Add(FinishedProduct, 1);
+            }
         }
     }
 }
