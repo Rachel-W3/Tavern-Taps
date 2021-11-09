@@ -46,14 +46,14 @@ public class NPC : MonoBehaviour
 
     void TakeFood()
     {
-        int numDishes = IngredientManager.Ingredients.Dishes.Count;
+        //int numDishes = IngredientManager.Ingredients.Dishes.Count;
 
-        if(numDishes > 0)
-        {
-            // For now, NPCs just take the top-most dish. Will implement selections later on
-            selectedDish = IngredientManager.Ingredients.Dishes[0];
-            IngredientManager.Ingredients.Dishes.RemoveAt(0);
-            eating = true;
-        }
+        //if(numDishes > 0)
+        //{
+        //    // For now, NPCs just take the top-most dish. Will implement selections later on
+        //    selectedDish = IngredientManager.Ingredients.Dishes[0];
+        //    IngredientManager.Ingredients.Dishes.RemoveAt(0);
+        //    eating = true;
+        //}
     }
 }

@@ -48,7 +48,7 @@ public class NPCManager : MonoBehaviour
 
         if(timer >= spawnCoolDown && guestCount < guestCapacity)
         {
-            SpawnNPC();
+            //SpawnNPC();
             timer = 0.0f;
         }
 

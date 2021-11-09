@@ -7,20 +7,34 @@ public class IngredientManager : MonoBehaviour
 {
     // Singleton
     private static IngredientManager ingredientManager;
-    public static IngredientManager Ingredients { get => ingredientManager; }
+    public static IngredientManager Instance { get => ingredientManager; }
 
-    public enum IngredientType
+    //Fields
+    public enum IngredientTypes
     {
-        Crop, Animal, Process 
+        DairyMeat,
+        Veggies,
+        Grain
     }
 
-    [SerializeField] private Ingredient[] cropList;
-    [SerializeField] private Ingredient[] animalList;
-    [SerializeField] private Ingredient[] processList;
+    private int Rice_Amount;
+    private int Pasta_Amount;
+    private int Boar_Meat_Amount;
+    private int Milk_Amount;
+    private int Butter_Amount;
+    private int Mandrake_Amount;
+    private int Lettuce_Amount;
+    private int Corn_Amount;
+    private int Eggs_Amount;
 
-    [SerializeField] public List<KeyValuePair<Ingredient, int>> ingredientInventory = new List<KeyValuePair<Ingredient, int>>();
-    public List<Dish> Dishes;
+    [SerializeField] private int DairyMeat_Amount;
+    [SerializeField] private int Veggies_Amount;
+    [SerializeField] private int Grain_Amount;
 
+    //Properties
+    public int DairyMeatAmt { get => DairyMeat_Amount; }
+    public int VeggiesAmt { get => Veggies_Amount; }
+    public int GrainAmt { get => Grain_Amount; }
 
     private void Awake()
     {
@@ -28,134 +42,133 @@ public class IngredientManager : MonoBehaviour
             ingredientManager = this; 
     }
 
-
     //Add Ingredients
-    public void addIngredient(Ingredient ingredient, int amt)
+    public void addIngredient(int amt, IngredientTypes ingredient)
     {
-        int newValue; 
-        for(int i = 0; i < ingredientInventory.Count; i++)
+        switch (ingredient)
         {
-            KeyValuePair<Ingredient, int> kvp = ingredientInventory[i];
-            if(kvp.Key.ingredientName == ingredient.ingredientName) 
-            {
-                newValue = kvp.Value + amt;
-                ingredientInventory.Remove(kvp);
-                ingredientInventory.Add(new KeyValuePair<Ingredient, int>(ingredient, newValue));
-                return;
-            }
-        }
-        ingredientInventory.Add(new KeyValuePair<Ingredient, int>(ingredient, amt));
+            case IngredientTypes.DairyMeat:
+                addDairyMeat(amt);
+                break;
+            
+            case IngredientTypes.Veggies:
+                addVeg(amt);
+                break;
+
+            case IngredientTypes.Grain:
+                addGrn(amt);
+                break;
+        }   
     }
 
+    private void addDairyMeat(int amt)
+    {
+        DairyMeat_Amount += amt; 
+    }
+
+    private void addVeg(int amt)
+    {
+        Veggies_Amount += amt;
+    }
+
+    private void addGrn(int amt)
+    {
+        Grain_Amount += amt;
+    }
 
     //Check if there are ingredients
-    public bool checkIngredient(int amt, Ingredient ingredient)
+    public bool checkIngredient(int amt, IngredientTypes ingredient)
     {
-
-        foreach(KeyValuePair<Ingredient, int> x in ingredientInventory)
+        switch (ingredient)
         {
-            if (x.Key.ingredientName == ingredient.ingredientName)
-                return x.Value >= amt;
-        }
+            case IngredientTypes.DairyMeat:
+                return checkDryMeat(amt);
 
-        return false; 
-        
+            case IngredientTypes.Veggies:
+                return checkVeg(amt);
+
+            case IngredientTypes.Grain:
+                return checkGrn(amt);                
+        }
+        return false;
     }
 
+    private bool checkDryMeat(int amt)
+    {
+        if (DairyMeat_Amount - amt >= 0)
+        {
+            return true;
+        }
+        return false;   
+    }
+
+    private bool checkVeg(int amt)
+    {
+        if (Veggies_Amount - amt >= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool checkGrn(int amt)
+    {
+        if (Grain_Amount - amt >= 0)
+        {
+            return true;
+        }
+        return false;
+    }
 
     //Remove Ingredients
-    public void removeIngredient(Ingredient ingredient, int amt)
+    public bool removeIngredient(int amt, IngredientTypes ingredient)
     {
-        int newValue;
-        for(int i = 0; i < ingredientInventory.Count; i++)
+        switch (ingredient)
         {
-            KeyValuePair<Ingredient, int> kvp = ingredientInventory[i];
-            if (kvp.Key.ingredientName == ingredient.ingredientName)
-            {
-                newValue = kvp.Value - amt;
-                ingredientInventory.Remove(kvp);
-                ingredientInventory.Add(new KeyValuePair<Ingredient, int>(ingredient, newValue));
-            }
-                        
+            case IngredientTypes.DairyMeat:
+                return subDryMeat(amt);
+
+            case IngredientTypes.Veggies:
+                return subVeg(amt);
+
+            case IngredientTypes.Grain:
+                return subGrn(amt);
         }
+        return false;
     }
 
-    //Add a random ingredient from an ingredient list;
-    public void addRandomIngredient(IngredientType type)
+    private bool subDryMeat(int amt)
     {
-        float rngCap = 0;
-        float probabilityTarget;
-
-        //Add numbers to this variable based on the ingredient type until it
-        //is greater than the randomly generated number
-        int probabilityCursor = 0; 
-
-        switch(type)
+        if (DairyMeat_Amount - amt >= 0)
         {
-            case IngredientType.Animal:
-                //Get the total rarities of all ingredients
-                foreach (Ingredient animal in animalList)
-                {
-                    rngCap += animal.rarity;
-                }
-
-                Debug.Log(rngCap);
-                //Randomly generate a number based on the rarities of all possible ingredients 
-                probabilityTarget = UnityEngine.Random.Range(0f, rngCap);
-               
-                foreach (Ingredient animal in animalList)
-                {
-                    probabilityCursor += animal.rarity;
-                    if (probabilityCursor >= probabilityTarget)
-                    {
-                        addIngredient(animal, 1);
-                        return;
-                    }
-                    
-                }
-                break;
-
-            case IngredientType.Crop:
-                foreach (Ingredient crop in cropList)
-                {
-                    rngCap += crop.rarity;
-                }
-
-                probabilityTarget = UnityEngine.Random.Range(0f, rngCap);
-
-                foreach (Ingredient crop in cropList)
-                {
-                    probabilityCursor += crop.rarity;
-                    if (probabilityCursor >= probabilityTarget)
-                    {
-                        addIngredient(crop, 1);
-                        return;
-                    }
-                }
-                break;
-
-            case IngredientType.Process:
-                foreach (Ingredient process in processList)
-                {
-                    rngCap += process.rarity;
-                }
-
-                probabilityTarget = UnityEngine.Random.Range(0f, rngCap);
-
-                foreach (Ingredient process in processList)
-                {
-                    probabilityCursor += process.rarity;
-                    if (probabilityCursor >= probabilityTarget)
-                    {
-                        addIngredient(process, 1);
-                        return;
-                    }
-                }
-                break;
-
-            default:
-                break;
+            DairyMeat_Amount -= amt;
+            return true;
         }
+        return false;
     }
 
+    private bool subVeg(int amt)
+    {
+        if (Veggies_Amount - amt >= 0)
+        {
+            Veggies_Amount -= amt;
+            return true;
+        }
+        return false;
+    }
+
+    private bool subGrn(int amt)
+    {
+        if (Grain_Amount - amt >= 0)
+        {
+            Grain_Amount -= amt;
+            return true;
+        }
+        return false;
+    }
+
+    private void OnGUI()
+    {
+        GUI.Box(new Rect(Screen.width * 2 / 3, Screen.width / 2, Screen.width / 3, Screen.height / 4), "Dairy / Meat: " + DairyMeat_Amount + "\nVeggies: " + Veggies_Amount + "\nGrain: " + Grain_Amount);
+    }
 }
