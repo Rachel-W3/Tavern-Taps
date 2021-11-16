@@ -14,6 +14,7 @@ public class NPC : MonoBehaviour
     private bool  satisfied;
 
     // Properties
+    public bool Eating { get => eating; }
     public bool Satisfied { get => satisfied; }
     public Dish SelectedDish { get => selectedDish; }
 
@@ -55,18 +56,22 @@ public class NPC : MonoBehaviour
     {
         float selectionValue = Random.value;
         //Simple Selection, needs to be changed
-        Recipe[] recipes = Resources.LoadAll<Recipe>(""); // Need a reference to all the recipes
-        if( recipes.Length == 1 )
-            selectedDish = recipes[0].FinishedProduct;
-            
-        else
+        GameObject recipeMenu = GameObject.Find("RecipeMenu"); // Extremely slow, but no better choice yet. May consider turning menus to singletons for easy access
+        List<Recipe> recipes;
+        if(recipeMenu != null)
         {
-            if (selectionValue > .5f)
+            recipes = recipeMenu.GetComponent<RecipeMenu>().Recipes;
+            if( recipes.Count == 1 )
                 selectedDish = recipes[0].FinishedProduct;
+            
             else
-                selectedDish = recipes[1].FinishedProduct;
+            {
+                if (selectionValue > .5f)
+                    selectedDish = recipes[0].FinishedProduct;
+                else
+                    selectedDish = recipes[1].FinishedProduct;
+            }
         }
-
         return selectedDish;
     }
 
