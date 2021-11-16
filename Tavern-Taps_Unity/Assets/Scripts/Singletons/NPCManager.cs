@@ -35,8 +35,7 @@ public class NPCManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // May scale these fields to tavern level in the future
-        guestCapacity = 5;
+        guestCapacity = TavernManager.Instance.Chairs.Length;
         guestCount = 0;
         spawnCoolDown = Random.Range(0.5f, 6.0f); 
     }
@@ -48,7 +47,7 @@ public class NPCManager : MonoBehaviour
 
         if(timer >= spawnCoolDown && guestCount < guestCapacity)
         {
-            //SpawnNPC();
+            SpawnNPC();
             timer = 0.0f;
         }
 
@@ -57,16 +56,15 @@ public class NPCManager : MonoBehaviour
 
     void SpawnNPC()
     {
+        Chair[] chairs = TavernManager.Instance.Chairs;
         // Look for available seats
-        foreach(Vector2 seatSpot in TavernManager.Instance.SeatingChart.Keys)
+        foreach (Chair chair in chairs)
         {
-            GameObject occupant = TavernManager.Instance.SeatingChart[seatSpot];
-
-            if(occupant == null)
+            if(!chair.Occupied)
             {
                 GameObject newNPC = Instantiate(npcPrefab);
-                newNPC.transform.position = seatSpot;
-                TavernManager.Instance.SeatingChart[seatSpot] = newNPC;
+                newNPC.transform.position = chair.transform.position; 
+                chair.setNPC(newNPC);
                 guestCount++;
                 return;
             }
@@ -75,17 +73,17 @@ public class NPCManager : MonoBehaviour
 
     void UpdateGuestList()
     {
-        // Check if guests are done eating
-        foreach(Vector2 seatSpot in TavernManager.Instance.SeatingChart.Keys)
-        {
-            GameObject occupant = TavernManager.Instance.SeatingChart[seatSpot];
+        Chair[] chairs = TavernManager.Instance.Chairs;
 
-            if(occupant != null && occupant.GetComponent<NPC>().Satisfied)
+        // Check if guests are done eating
+        foreach (Chair chair in chairs)
+        {
+            GameObject occupant = chair.Occupant;
+            if(chair.Occupied && occupant.GetComponent<NPC>().Satisfied)
             {
-                TavernManager.Instance.SeatingChart[seatSpot] = null;
+                chair.clearNPC();
                 guestCount--;
                 Destroy(occupant);
-                return;
             }
         }
     }

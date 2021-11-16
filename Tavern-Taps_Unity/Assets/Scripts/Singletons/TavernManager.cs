@@ -20,59 +20,73 @@ public class TavernManager : MonoBehaviour
     private int                             gold;
     private int                             tavernLevel;
     // Seating
-    private List<Vector2>                   seatPositions; // Might make it easier for adding new seats down the line
-    private Dictionary<Vector2, GameObject> seatingChart; // Key : Value = seatPosition : NPC occupant
+    private Chair[] chairs;
+
     // Dish display
     public Dictionary<Dish, int>            Dishes;
     [SerializeField] private GameObject     bar;
 
     // Properties
-    public int Gold { get => gold; set => gold = value; }
-    public Dictionary<Vector2, GameObject> SeatingChart { get => seatingChart; }
+    public int Gold { get => gold; set => setGold(value); }
+    public Chair[] Chairs { get => chairs; }
 
     private void Awake()
     {
         // Initializing singleton
         if (instance == null) instance = this;
-        // Seating
-        seatPositions = new List<Vector2>();
-        seatingChart = new Dictionary<Vector2, GameObject>();
-        // Dishes
+        chairs = FindObjectsOfType<Chair>();
         Dishes = new Dictionary<Dish, int>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        // Initializing seating positions
-        for(int i = -2; i <= 2; i++)
-        {
-            seatPositions.Add(new Vector2(i, -4));
-        }
-
-        foreach(Vector2 pos in seatPositions)
-        {
-            seatingChart.Add(pos, null);
-        }
+        //chairs = FindObjectsOfType<Chair>();
 
         // Initializing bar for dish display
         RectTransform barRT = (RectTransform)bar.transform;
         Debug.Log("Position: " + barRT.rect.width);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void addDish(Dish dish)
     {
-        
+        if (Dishes.ContainsKey(dish))
+        {
+            Dishes[dish] += 1;
+            bar.GetComponent<Bar>().refresh();
+            return; 
+        }
+        Dishes.Add(dish, 1);
+        bar.GetComponent<Bar>().refresh();
     }
 
-    private void OnGUI()
+    public void removeDish(Dish dish)
     {
-        string DishString = "";
+        if (Dishes.ContainsKey(dish))
+        {
+            Dishes[dish] -= 1;
+            if (Dishes[dish] <= 0)
+            {
+                Dishes.Remove(dish);
+                bar.GetComponent<Bar>().refresh();
+            }
+                
+        }
+    }
+    
+    public int getNumDishes()
+    {
+        int total = 0;
 
         foreach (KeyValuePair<Dish, int> dish in Dishes)
-            DishString += "\n" + dish.Key.Name + ": " + dish.Value;
+            total += dish.Value;
 
-        GUI.Box(new Rect(Screen.width / 2, Screen.width / 4, Screen.width / 2, Screen.height / 8), "\nDishes:" + DishString);
+        return total; 
+    }
+
+    private void setGold(int value)
+    {
+        gold = value;
+        MainMenu.updateMoneyUI(value);
     }
 }

@@ -9,5 +9,6 @@ public class Dish : ScriptableObject
     public string Name;
     public string Description;
     public Texture2D Image;
+    public Sprite sprite;
     public int goldOutput;
 }

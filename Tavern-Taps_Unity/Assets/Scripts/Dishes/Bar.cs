@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Bar : MonoBehaviour
 {
@@ -23,6 +24,30 @@ public class Bar : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void refresh()
+    {
+        foreach(KeyValuePair<Dish, int> dish in TavernManager.Instance.Dishes)
+        {
+            //This is rushed and bad, It will need to be changed
+            if (dish.Value > 0)
+            {
+                if (dish.Key.Name == "Dire bacon and eggs")
+                {
+                    ShowObject(bacon_n_eggs);
+                    bacon_n_eggs.GetComponentInChildren<Text>().text = dish.Value.ToString();
+                }
+
+                else if (dish.Key.Name == "Mandrake Stirfry")
+                {
+                    ShowObject(mandrake_stirfry);
+                    Debug.Log(dish.Value);
+                    mandrake_stirfry.GetComponentInChildren<Text>().text = dish.Value.ToString();
+                }
+            }
+        }
+        return;
     }
 
     private void HideObject(GameObject gameObject)

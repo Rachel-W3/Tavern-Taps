@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: def5c942843b5a545a10f094f401a6ba, type: 3}
+  m_Name: Rice
+  m_EditorClassIdentifier: 
+  ingredientName: Rice
+  description: A grain grown in large wetfields. Can be steamed and eaten alone or
+    used as the foundation of several dishes.
+  image: {fileID: 2800000, guid: 4301ca12196029244aebbdfcb1f2596c, type: 3}
+  rarity: 1
