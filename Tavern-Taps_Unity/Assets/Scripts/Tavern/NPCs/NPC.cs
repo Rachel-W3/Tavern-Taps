@@ -22,6 +22,9 @@ public class NPC : MonoBehaviour
     {
         eating = false;
         satisfied = false;
+
+        // Pick random dish from list of discovered dishes
+        selectedDish = SelectDish();
     }
 
     // Update is called once per frame
@@ -43,20 +46,25 @@ public class NPC : MonoBehaviour
         }
     }
 
-    Dish GetPickedDish()
+    /// <summary>
+    /// NPCs request a dish from the list of available recipes in the recipe menu
+    /// and make their selection
+    /// </summary>
+    /// <returns> selected dish </returns>
+    Dish SelectDish()
     {
         float selectionValue = Random.value;
         //Simple Selection, needs to be changed
-        List<Dish> possibleDishes = new List<Dish>(TavernManager.Instance.Dishes.Keys);
-        if( possibleDishes.Count == 1 )
-            selectedDish = possibleDishes[0];
+        Recipe[] recipes = Resources.LoadAll<Recipe>(""); // Need a reference to all the recipes
+        if( recipes.Length == 1 )
+            selectedDish = recipes[0].FinishedProduct;
             
         else
         {
             if (selectionValue > .5f)
-                selectedDish = possibleDishes[0];
+                selectedDish = recipes[0].FinishedProduct;
             else
-                selectedDish = possibleDishes[1];
+                selectedDish = recipes[1].FinishedProduct;
         }
 
         return selectedDish;
@@ -67,7 +75,7 @@ public class NPC : MonoBehaviour
         int numDishes = TavernManager.Instance.getNumDishes();
         if(numDishes > 0)
         {
-            TavernManager.Instance.removeDish(GetPickedDish());
+            TavernManager.Instance.removeDish(selectedDish);
             eating = true;
         }
     }

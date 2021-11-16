@@ -10,6 +10,8 @@ public class RecipeMenu : MonoBehaviour
     private int DishIndex = 0;
     [SerializeField] private VisualTreeAsset recipeTemplate;
 
+    public List<Recipe> Recipes { get => recipes; }
+
     void Start()
     {
         //Load the values for all of the dishes

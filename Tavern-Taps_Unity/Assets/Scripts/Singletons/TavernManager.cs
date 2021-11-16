@@ -23,7 +23,7 @@ public class TavernManager : MonoBehaviour
     private Chair[] chairs;
 
     // Dish display
-    public Dictionary<Dish, int>            Dishes;
+    public List<Dish>                       Dishes;
     [SerializeField] private GameObject     bar;
 
     // Properties
@@ -35,7 +35,8 @@ public class TavernManager : MonoBehaviour
         // Initializing singleton
         if (instance == null) instance = this;
         chairs = FindObjectsOfType<Chair>();
-        Dishes = new Dictionary<Dish, int>();
+
+        Dishes = new List<Dish>();
     }
 
     // Start is called before the first frame update
@@ -50,27 +51,26 @@ public class TavernManager : MonoBehaviour
 
     public void addDish(Dish dish)
     {
-        if (Dishes.ContainsKey(dish))
+        foreach(Dish d in Dishes)
         {
-            Dishes[dish] += 1;
-            bar.GetComponent<Bar>().refresh();
-            return; 
+            if(dish.Name == d.Name )
+            {
+                d.quantity++;
+                break;
+            }
         }
-        Dishes.Add(dish, 1);
         bar.GetComponent<Bar>().refresh();
     }
 
     public void removeDish(Dish dish)
     {
-        if (Dishes.ContainsKey(dish))
+        foreach(Dish d in Dishes)
         {
-            Dishes[dish] -= 1;
-            if (Dishes[dish] <= 0)
+            if(dish.Name == d.Name )
             {
-                Dishes.Remove(dish);
-                bar.GetComponent<Bar>().refresh();
+                d.quantity--;
+                break;
             }
-                
         }
     }
     
@@ -78,8 +78,8 @@ public class TavernManager : MonoBehaviour
     {
         int total = 0;
 
-        foreach (KeyValuePair<Dish, int> dish in Dishes)
-            total += dish.Value;
+        foreach (Dish d in Dishes)
+            total += d.quantity;
 
         return total; 
     }

@@ -28,22 +28,22 @@ public class Bar : MonoBehaviour
 
     public void refresh()
     {
-        foreach(KeyValuePair<Dish, int> dish in TavernManager.Instance.Dishes)
+        foreach(Dish dish in TavernManager.Instance.Dishes)
         {
             //This is rushed and bad, It will need to be changed
-            if (dish.Value > 0)
+            if (dish.quantity > 0)
             {
-                if (dish.Key.Name == "Dire bacon and eggs")
+                if (dish.Name == "Dire bacon and eggs")
                 {
                     ShowObject(bacon_n_eggs);
-                    bacon_n_eggs.GetComponentInChildren<Text>().text = dish.Value.ToString();
+                    bacon_n_eggs.GetComponentInChildren<Text>().text = dish.quantity.ToString();
                 }
 
-                else if (dish.Key.Name == "Mandrake Stirfry")
+                else if (dish.Name == "Mandrake Stirfry")
                 {
                     ShowObject(mandrake_stirfry);
-                    Debug.Log(dish.Value);
-                    mandrake_stirfry.GetComponentInChildren<Text>().text = dish.Value.ToString();
+                    Debug.Log(dish.quantity);
+                    mandrake_stirfry.GetComponentInChildren<Text>().text = dish.quantity.ToString();
                 }
             }
         }
