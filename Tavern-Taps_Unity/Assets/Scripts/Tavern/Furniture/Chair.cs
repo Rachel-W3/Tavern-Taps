@@ -22,14 +22,14 @@ public class Chair : MonoBehaviour
 
     void Update()
     {
-        //Dish selectedDish = occupant.GetComponent<NPC>().SelectedDish;
-        //if(occupied && table.Empty && selectedDish)
-        //{
-        //    if(selectedDish == occupant.GetComponent<NPC>().SelectedDish && occupant.GetComponent<NPC>().Eating )
-        //    {
-        //        table.setDish(selectedDish);
-        //    }
-        //}
+        Dish selectedDish = occupant.GetComponent<NPC>().SelectedDish;
+        if(occupied && table.Empty && selectedDish)
+        {
+            if(selectedDish == occupant.GetComponent<NPC>().SelectedDish && occupant.GetComponent<NPC>().Eating )
+            {
+                table.setDish(selectedDish);
+            }
+        }
     }
 
     public void setNPC(GameObject npc)
