@@ -6,13 +6,12 @@ using TMPro;
 public class NPC : MonoBehaviour
 {
     // Fields
-    /**************/ private float timePickingFood = 1.0f; // NPCs take 1 second to order food
-    /**************/ private float totalEatingTime = 5.0f;
-    /**************/ private bool  eating;
-    /**************/ private float timer = 0.0f;
-    /**************/ private Dish  selectedDish;
-    /**************/ private bool  satisfied;
-    // TODO: Variable for food request bubble (UI)
+    private float timePickingFood = 1.0f; // NPCs take 1 second to order food
+    private float totalEatingTime = 5.0f;
+    private bool  eating;
+    private float timer = 0.0f;
+    private Dish  selectedDish;
+    private bool  satisfied;
 
     // Properties
     public bool Satisfied { get => satisfied; }
@@ -39,9 +38,28 @@ public class NPC : MonoBehaviour
         if(eating && timer >= totalEatingTime)
         {
             satisfied = true;
-            TavernManager.Instance.Gold += selectedDish.goldOutput;
+            TavernManager.Instance.Gold += selectedDish.GoldOutput; 
             timer = 0.0f;
         }
+    }
+
+    Dish GetPickedDish()
+    {
+        float selectionValue = Random.value;
+        //Simple Selection, needs to be changed
+        List<Dish> possibleDishes = new List<Dish>(TavernManager.Instance.Dishes.Keys);
+        if( possibleDishes.Count == 1 )
+            selectedDish = possibleDishes[0];
+            
+        else
+        {
+            if (selectionValue > .5f)
+                selectedDish = possibleDishes[0];
+            else
+                selectedDish = possibleDishes[1];
+        }
+
+        return selectedDish;
     }
 
     void TakeFood()
@@ -49,21 +67,7 @@ public class NPC : MonoBehaviour
         int numDishes = TavernManager.Instance.getNumDishes();
         if(numDishes > 0)
         {
-            float selectionValue = Random.value;
-            //Simple Selection, needs to be changed
-            List<Dish> possibleDishes = new List<Dish>(TavernManager.Instance.Dishes.Keys);
-            if( possibleDishes.Count == 1 )
-                selectedDish = possibleDishes[0];
-            
-            else
-            {
-                if (selectionValue > .5f)
-                    selectedDish = possibleDishes[0];
-                else
-                    selectedDish = possibleDishes[1];
-            }
-
-            TavernManager.Instance.removeDish(selectedDish);
+            TavernManager.Instance.removeDish(GetPickedDish());
             eating = true;
         }
     }

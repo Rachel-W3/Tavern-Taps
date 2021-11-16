@@ -10,5 +10,8 @@ public class Dish : ScriptableObject
     public string Description;
     public Texture2D Image;
     public Sprite sprite;
-    public int goldOutput;
+    public int starRating;
+    private int baseGoldOutput = 5; // Gold output scales to rating of food
+
+    public int GoldOutput { get => baseGoldOutput * starRating;}
 }
