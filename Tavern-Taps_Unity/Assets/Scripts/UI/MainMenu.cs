@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     { 
-        var root = GetComponent<UIDocument>().rootVisualElement;
+        var root = GetComponent<UIDocument>().rootVisualElement; 
 
         ChangeGameState(GAME_STATE.TAVERN);
 
