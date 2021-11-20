@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,17 +10,17 @@ public class IngredientPlot : MonoBehaviour
     public Button plotButton;
     [SerializeField] string plotName;
     [SerializeField] IngredientManager.IngredientType type;
-    [SerializeField] static float growthRate = 1.0f;
-    [SerializeField] int growthAmount = 1;
+    [SerializeField] static float growthRate = .1f;
+    [SerializeField] float growthAmount = 1.0f;
     [SerializeField] int ingredientCapacity = 100;
-    [SerializeField] private int storedIngredient = 0;
+    [SerializeField] private float storedIngredient = 0.0f;
 
     //Properties
     public IngredientManager.IngredientType Type { get => type; }
     public float GrowthRate { get => growthRate; set => growthRate = value; }
-    public int GrowthAmount { get => growthAmount; set => growthAmount = value; }
+    public float GrowthAmount { get => growthAmount; set => growthAmount = value; }
     public int IngredientCapacity { get => ingredientCapacity; set => ingredientCapacity = value; }
-    public int StoredIngredient { get => storedIngredient; set => storedIngredient = Mathf.Clamp(value, 0, ingredientCapacity); }
+    public float StoredIngredient { get => storedIngredient; set => storedIngredient = Mathf.Clamp(value, 0, ingredientCapacity); }
 
     WaitForSeconds waitForGrowth = new WaitForSeconds(growthRate);
 
@@ -32,7 +33,7 @@ public class IngredientPlot : MonoBehaviour
 
     public void harvest()
     {
-        for (int i = 0; i < storedIngredient; i++)
+        for (int i = 0; i < Math.Floor(storedIngredient); i++)
         {
             IngredientManager.Ingredients.addRandomIngredient(type);
         }
@@ -53,7 +54,7 @@ public class IngredientPlot : MonoBehaviour
             if (storedIngredient + growthAmount <= ingredientCapacity)
             {
                 storedIngredient += growthAmount;
-                plotButton.GetComponentInChildren<Text>().text = plotName + " (" + storedIngredient.ToString() + ")";
+                plotButton.GetComponentInChildren<Text>().text = plotName + " (" + Math.Floor(storedIngredient).ToString() + ")";
             }
             else { storedIngredient = ingredientCapacity; }
         }
