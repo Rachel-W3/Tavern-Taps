@@ -49,7 +49,6 @@ public class NPC : MonoBehaviour
         int numDishes = TavernManager.Instance.getNumDishes();
         if(numDishes > 0)
         {
-            float selectionValue = Random.value;
             //Simple Selection, needs to be changed
             List<Dish> possibleDishes = new List<Dish>(TavernManager.Instance.Dishes.Keys);
             if( possibleDishes.Count == 1 )
@@ -57,10 +56,28 @@ public class NPC : MonoBehaviour
             
             else
             {
-                if (selectionValue > .5f)
-                    selectedDish = possibleDishes[0];
-                else
-                    selectedDish = possibleDishes[1];
+                float rngCap = 0;
+                float probabilityCursor= 0;
+
+                //Get the total rarities of all ingredients
+                foreach (Dish dish in possibleDishes)
+                {
+                    rngCap += 0.1f;
+                }
+
+                //Randomly generate a number based on the number of possible ingredients
+                float probabilityTarget = UnityEngine.Random.Range(0f, rngCap);
+
+                foreach (Dish dish in possibleDishes)
+                {
+                    probabilityCursor += 0.1f;
+                    if (probabilityCursor >= probabilityTarget)
+                    {
+                        selectedDish = dish;
+                        return;
+                    }
+
+                }
             }
 
             TavernManager.Instance.removeDish(selectedDish);
