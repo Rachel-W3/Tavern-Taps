@@ -69,8 +69,7 @@ public class TavernManager : MonoBehaviour
             bar.GetComponent<Bar>().refresh();
 
             if (Dishes[dish] <= 0)
-                Dishes.Remove(dish);
-            
+                Dishes.Remove(dish);        
             
         }
     }
