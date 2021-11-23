@@ -21,7 +21,10 @@ public class IngredientMenu : MonoBehaviour
         var ingredientContainer = root.Q<VisualElement>("ingredientsContainer");
 
         //Set onclick handlers
-        var ingredientExitButton = root.Q<Button>("ExitButton");
+        var menuExitButton = root.Q<Button>("MenuExitButton");
+        menuExitButton.clicked += hideIngredientMenu;
+
+        var ingredientExitButton = root.Q<Button>("ViewExitButton");
         ingredientExitButton.clicked += hideIngredientView;
 
         var nextIngredientButton = root.Q<Button>("NextIngredient");
@@ -99,6 +102,11 @@ public class IngredientMenu : MonoBehaviour
         var root = GetComponent<UIDocument>().rootVisualElement;
         var ingredientView = root.Q<VisualElement>("IngredientView");
         ingredientView.style.display = StyleKeyword.None;
+    }
+
+    private void hideIngredientMenu()
+    {
+        GetComponent<UIDocument>().enabled = false;
     }
 
     private int FindIngredientIndex(Ingredient ingredient)

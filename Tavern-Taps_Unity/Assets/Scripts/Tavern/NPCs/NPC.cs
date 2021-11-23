@@ -6,15 +6,15 @@ using TMPro;
 public class NPC : MonoBehaviour
 {
     // Fields
-    private float timePickingFood = 1.0f; // NPCs take 1 second to order food
-    private float totalEatingTime = 5.0f;
-    private bool  eating;
-    private float timer = 0.0f;
-    private Dish  selectedDish;
-    private bool  satisfied;
+    /**************/ private float timePickingFood = 1.0f; // NPCs take 1 second to order food
+    /**************/ private float totalEatingTime = 5.0f;
+    /**************/ private bool  eating;
+    /**************/ private float timer = 0.0f;
+    /**************/ private Dish  selectedDish;
+    /**************/ private bool  satisfied;
+    // TODO: Variable for food request bubble (UI)
 
     // Properties
-    public bool Eating { get => eating; }
     public bool Satisfied { get => satisfied; }
     public Dish SelectedDish { get => selectedDish; }
 
@@ -23,9 +23,6 @@ public class NPC : MonoBehaviour
     {
         eating = false;
         satisfied = false;
-
-        // Pick random dish from list of discovered dishes
-        selectedDish = SelectDish();
     }
 
     // Update is called once per frame
@@ -42,37 +39,9 @@ public class NPC : MonoBehaviour
         if(eating && timer >= totalEatingTime)
         {
             satisfied = true;
-            TavernManager.Instance.Gold += selectedDish.GoldOutput; 
+            TavernManager.Instance.Gold += selectedDish.goldOutput;
             timer = 0.0f;
         }
-    }
-
-    /// <summary>
-    /// NPCs request a dish from the list of available recipes in the recipe menu
-    /// and make their selection
-    /// </summary>
-    /// <returns> selected dish </returns>
-    Dish SelectDish()
-    {
-        float selectionValue = Random.value;
-        //Simple Selection, needs to be changed
-        GameObject recipeMenu = GameObject.Find("RecipeMenu"); // Extremely slow, but no better choice yet. May consider turning menus to singletons for easy access
-        List<Recipe> recipes;
-        if(recipeMenu != null)
-        {
-            recipes = recipeMenu.GetComponent<RecipeMenu>().Recipes;
-            if( recipes.Count == 1 )
-                selectedDish = recipes[0].FinishedProduct;
-            
-            else
-            {
-                if (selectionValue > .5f)
-                    selectedDish = recipes[0].FinishedProduct;
-                else
-                    selectedDish = recipes[1].FinishedProduct;
-            }
-        }
-        return selectedDish;
     }
 
     void TakeFood()
@@ -80,6 +49,37 @@ public class NPC : MonoBehaviour
         int numDishes = TavernManager.Instance.getNumDishes();
         if(numDishes > 0)
         {
+            //Simple Selection, needs to be changed
+            List<Dish> possibleDishes = new List<Dish>(TavernManager.Instance.Dishes.Keys);
+            if( possibleDishes.Count == 1 )
+                selectedDish = possibleDishes[0];
+            
+            else
+            {
+                float rngCap = 0;
+                float probabilityCursor= 0;
+
+                //Get the total rarities of all ingredients
+                foreach (Dish dish in possibleDishes)
+                {
+                    rngCap += 0.1f;
+                }
+
+                //Randomly generate a number based on the number of possible ingredients
+                float probabilityTarget = UnityEngine.Random.Range(0f, rngCap);
+
+                foreach (Dish dish in possibleDishes)
+                {
+                    probabilityCursor += 0.1f;
+                    if (probabilityCursor >= probabilityTarget)
+                    {
+                        selectedDish = dish;
+                        return;
+                    }
+
+                }
+            }
+
             TavernManager.Instance.removeDish(selectedDish);
             eating = true;
         }
