@@ -64,10 +64,9 @@ public class NPCManager : MonoBehaviour
             {
                 GameObject newNPC = Instantiate(npcPrefab, chair.transform);
                 // Getting nested children
-                GameObject iconParent = newNPC.transform.GetChild(0).gameObject;
-                GameObject requestedFoodIcon = iconParent.transform.GetChild(0).gameObject;
+                //GameObject iconParent = newNPC.transform.GetChild(0).gameObject;
+                //GameObject requestedFoodIcon = iconParent.transform.GetChild(0).gameObject;
                 //requestedFoodIcon.GetComponent<SpriteRenderer>().sprite = newNPC.GetComponent<NPC>().SelectedDish.sprite;
-                Debug.Log(newNPC.GetComponent<NPC>().SelectedDish);
                 newNPC.transform.position = chair.transform.position;
                 chair.setNPC(newNPC);
                 guestCount++;

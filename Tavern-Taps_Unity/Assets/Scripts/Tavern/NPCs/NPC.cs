@@ -12,7 +12,7 @@ public class NPC : MonoBehaviour
     /**************/ private float       timer = 0.0f;
     /**************/ private Dish        selectedDish;
     /**************/ private bool        satisfied;
-    [SerializeField] private GameObject  foodRequestIcon;
+    [SerializeField] private GameObject  iconPrefab;
 
     // Properties
     public bool Satisfied { get => satisfied; }
@@ -24,7 +24,7 @@ public class NPC : MonoBehaviour
     {
         eating = false;
         satisfied = false;
-        foodRequestIcon.GetComponent<RectTransform>().position = new Vector3(0, 3.57f, 0);
+        iconPrefab.GetComponent<RectTransform>().position = new Vector3(0, 3.57f, 0);
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class NPC : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(!eating && timer >= timePickingFood)
+        if(!eating && timer >= timePickingFood && !selectedDish)
         {
             OrderFood();
             timer = 0.0f;
@@ -73,7 +73,7 @@ public class NPC : MonoBehaviour
                 }
 
                 //Randomly generate a number based on the number of possible ingredients
-                float probabilityTarget = UnityEngine.Random.Range(0f, rngCap);
+                float probabilityTarget = Random.Range(0f, rngCap);
 
                 foreach (Recipe recipe in orderOptions)
                 {
@@ -87,7 +87,13 @@ public class NPC : MonoBehaviour
                 }
             }
 
-            Instantiate(foodRequestIcon, gameObject.transform);
+            Debug.Log(selectedDish.name);
+
+            GameObject icon = Instantiate(iconPrefab, gameObject.transform);
+            Debug.Log(icon);
+            GameObject requestedFood = icon.transform.GetChild(0).gameObject;
+            requestedFood.GetComponent<SpriteRenderer>().sprite = selectedDish.sprite;
+            Debug.Log(selectedDish.sprite.name);
             //TavernManager.Instance.removeDish(selectedDish);
             eating = true;
         }
