@@ -22,13 +22,10 @@ public class Chair : MonoBehaviour
 
     void Update()
     {
-        Dish selectedDish = occupant.GetComponent<NPC>().SelectedDish;
-        if(occupied && table.Empty && selectedDish)
+        Dish selectedDish;
+        if((selectedDish = occupant.GetComponent<NPC>().SelectedDish) && occupant.GetComponent<NPC>().Eating )
         {
-            if(selectedDish == occupant.GetComponent<NPC>().SelectedDish && occupant.GetComponent<NPC>().Eating )
-            {
-                table.setDish(selectedDish);
-            }
+            table.setDish(selectedDish);
         }
     }
 

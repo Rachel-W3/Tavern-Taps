@@ -15,10 +15,12 @@ public class TavernManager : MonoBehaviour
     // Singleton
     private static TavernManager instance;
     public static TavernManager Instance { get => instance;}
+    [SerializeField] private List<Recipe> knownRecipes;
 
     // Fields
     private int                             gold;
     private int                             tavernLevel;
+
     // Seating
     private Chair[] chairs;
 
@@ -28,6 +30,7 @@ public class TavernManager : MonoBehaviour
 
     // Properties
     public int Gold { get => gold; set => setGold(value); }
+    public List<Recipe> KnownRecipes { get => knownRecipes; }
     public Chair[] Chairs { get => chairs; }
 
     private void Awake()
@@ -46,6 +49,11 @@ public class TavernManager : MonoBehaviour
         // Initializing bar for dish display
         RectTransform barRT = (RectTransform)bar.transform;
         Debug.Log("Position: " + barRT.rect.width);
+    }
+
+    public void addNewRecipe(Recipe newRecipe)
+    {
+        knownRecipes.Add(newRecipe);
     }
 
     public void addDish(Dish dish)
