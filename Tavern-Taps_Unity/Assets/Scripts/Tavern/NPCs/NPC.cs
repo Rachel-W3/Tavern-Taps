@@ -81,21 +81,18 @@ public class NPC : MonoBehaviour
                     if (probabilityCursor >= probabilityTarget)
                     {
                         selectedDish = recipe.FinishedProduct;
-                        return;
+                        break;
                     }
 
                 }
             }
 
-            Debug.Log(selectedDish.name);
-
             GameObject icon = Instantiate(iconPrefab, gameObject.transform);
-            Debug.Log(icon);
             GameObject requestedFood = icon.transform.GetChild(0).gameObject;
             requestedFood.GetComponent<SpriteRenderer>().sprite = selectedDish.sprite;
-            Debug.Log(selectedDish.sprite.name);
+
             //TavernManager.Instance.removeDish(selectedDish);
-            eating = true;
+            // eating = true;
         }
     }
 }
