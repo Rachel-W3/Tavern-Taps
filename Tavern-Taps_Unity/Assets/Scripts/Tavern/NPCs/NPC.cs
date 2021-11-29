@@ -12,6 +12,7 @@ public class NPC : MonoBehaviour
     /**************/ private float       timer = 0.0f;
     /**************/ private Dish        selectedDish;
     /**************/ private bool        satisfied;
+    /**************/ private GameObject  icon;
     [SerializeField] private GameObject  iconPrefab;
 
     // Properties
@@ -35,6 +36,7 @@ public class NPC : MonoBehaviour
         if(!eating && timer >= timePickingFood && !selectedDish)
         {
             OrderFood();
+            EatFood();
             timer = 0.0f;
         }
 
@@ -87,12 +89,20 @@ public class NPC : MonoBehaviour
                 }
             }
 
-            GameObject icon = Instantiate(iconPrefab, gameObject.transform);
+            // Setting the requested food icon to the right sprite
+            icon = Instantiate(iconPrefab, gameObject.transform);
             GameObject requestedFood = icon.transform.GetChild(0).gameObject;
             requestedFood.GetComponent<SpriteRenderer>().sprite = selectedDish.sprite;
-
-            //TavernManager.Instance.removeDish(selectedDish);
-            // eating = true;
         }
+    }
+
+    /// <summary>
+    /// NPC takes cooked dishes from dictionary in tavern manager and enters eating state
+    /// </summary>
+    void EatFood()
+    {
+        TavernManager.Instance.removeDish(selectedDish);
+        icon.SetActive(false);
+        eating = true;
     }
 }

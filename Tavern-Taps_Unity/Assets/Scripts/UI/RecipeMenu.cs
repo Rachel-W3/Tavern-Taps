@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class RecipeMenu : MonoBehaviour
 {
-    private List<Recipe> recipes = new List<Recipe>();
+    private List<Recipe> recipes = new List<Recipe>(); 
     private int DishIndex = 0;
     [SerializeField] private VisualTreeAsset recipeTemplate;
 
