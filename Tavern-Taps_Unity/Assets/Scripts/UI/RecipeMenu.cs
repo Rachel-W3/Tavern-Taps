@@ -62,9 +62,7 @@ public class RecipeMenu : MonoBehaviour
 
     private void loadRecipes()
     {
-        Recipe[] rawRecipes = Resources.LoadAll<Recipe>("");
-        foreach(Recipe recipe in rawRecipes)
-            recipes.Add(recipe);
+        recipes = TavernManager.Instance.KnownRecipes;
     }
 
     private void nextRecipe()

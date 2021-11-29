@@ -33,9 +33,11 @@ public class NPC : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(!eating && timer >= timePickingFood && !selectedDish)
+        if(!eating && timer >= timePickingFood)
         {
-            OrderFood();
+            if(!selectedDish)
+                OrderFood();
+
             EatFood();
             timer = 0.0f;
         }
@@ -99,10 +101,15 @@ public class NPC : MonoBehaviour
     /// <summary>
     /// NPC takes cooked dishes from dictionary in tavern manager and enters eating state
     /// </summary>
-    void EatFood()
+    bool EatFood()
     {
-        TavernManager.Instance.removeDish(selectedDish);
-        icon.SetActive(false);
-        eating = true;
+        if(TavernManager.Instance.removeDish(selectedDish))
+        { 
+            icon.SetActive(false);
+            eating = true;
+            return true;
+        }
+
+        return false;
     }
 }
