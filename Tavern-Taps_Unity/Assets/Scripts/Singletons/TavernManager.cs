@@ -65,12 +65,11 @@ public class TavernManager : MonoBehaviour
         if (Dishes.ContainsKey(dish))
         {
             Dishes[dish] -= 1;
+
+            bar.GetComponent<Bar>().refresh();
+
             if (Dishes[dish] <= 0)
-            {
-                Dishes.Remove(dish);
-                bar.GetComponent<Bar>().refresh();
-            }
-                
+                Dishes.Remove(dish);        
         }
     }
     

@@ -122,7 +122,7 @@ public class MainMenu : MonoBehaviour
         HideObject(RecipeOverlay);
     }
 
-    private void hideAllOverlays()
+    public void hideAllOverlays()
     {
         hideIngredientOverlay();
         hideRecipeOverlay();

@@ -22,8 +22,11 @@ public class RecipeMenu : MonoBehaviour
         var recipeContainer = root.Q<VisualElement>("recipesContainer");
 
         //Set onclick handlers
-        var DishExitButton = root.Q<Button>("ExitButton");
-        DishExitButton.clicked += hideDishMenu;
+        var MenuExitButton = root.Q<Button>("MenuExitButton");
+        MenuExitButton.clicked += hideDishMenu;
+
+        var ViewExitButton = root.Q<Button>("ViewExitButton");
+        ViewExitButton.clicked += hideDishView;
 
         var NextRecipeButton = root.Q<Button>("NextRecipe");
         NextRecipeButton.clicked += nextRecipe;
@@ -49,7 +52,7 @@ public class RecipeMenu : MonoBehaviour
 
             var recipeButton = recipeContainer.Query<Button>().Last();
             recipeButton.style.backgroundImage = recipe.FinishedProduct.Image;
-            recipeButton.clicked += () => showDishMenu(recipe);
+            recipeButton.clicked += () => showDishView(recipe);
 
         }
 
@@ -68,7 +71,7 @@ public class RecipeMenu : MonoBehaviour
         if (DishIndex >= recipes.Count)
             DishIndex = 0;
 
-        showDishMenu(recipes[DishIndex]);
+        showDishView(recipes[DishIndex]);
 
     }
 
@@ -78,10 +81,10 @@ public class RecipeMenu : MonoBehaviour
         if (DishIndex < 0)
             DishIndex = recipes.Count - 1;
 
-        showDishMenu(recipes[DishIndex]);
+        showDishView(recipes[DishIndex]);
     }
 
-    private void showDishMenu(Recipe recipe)
+    private void showDishView(Recipe recipe)
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
         var DishMenu = root.Q<VisualElement>("DishMenu");
@@ -104,11 +107,21 @@ public class RecipeMenu : MonoBehaviour
         DishDescripton.text = recipe.FinishedProduct.Description;
     }
 
-    private void hideDishMenu()
+    private void hideDishView()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
         var DishMenu = root.Q<VisualElement>("DishMenu");
         DishMenu.style.display = StyleKeyword.None;
+    }
+
+    private void hideDishMenu()
+    {
+        GetComponent<UIDocument>().enabled = false;
+    }
+
+    private void hideIngredientMenu()
+    {
+        GetComponent<UIDocument>().enabled = false;
     }
 
     private int FindRecipeIndex(Recipe recipe)
