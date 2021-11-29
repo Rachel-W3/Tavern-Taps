@@ -6,9 +6,11 @@ using UnityEngine.UIElements;
 
 public class RecipeMenu : MonoBehaviour
 {
-    private List<Recipe> recipes = new List<Recipe>();
+    private List<Recipe> recipes = new List<Recipe>(); 
     private int DishIndex = 0;
     [SerializeField] private VisualTreeAsset recipeTemplate;
+
+    public List<Recipe> Recipes { get => recipes; }
 
     void Start()
     {
@@ -60,9 +62,7 @@ public class RecipeMenu : MonoBehaviour
 
     private void loadRecipes()
     {
-        Recipe[] rawRecipes = Resources.LoadAll<Recipe>("");
-        foreach(Recipe recipe in rawRecipes)
-            recipes.Add(recipe);
+        recipes = TavernManager.Instance.KnownRecipes;
     }
 
     private void nextRecipe()

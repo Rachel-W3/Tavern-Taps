@@ -15,10 +15,12 @@ public class TavernManager : MonoBehaviour
     // Singleton
     private static TavernManager instance;
     public static TavernManager Instance { get => instance;}
+    [SerializeField] private List<Recipe> knownRecipes;
 
     // Fields
     private int                             gold;
     private int                             tavernLevel;
+
     // Seating
     private Chair[] chairs;
 
@@ -28,6 +30,7 @@ public class TavernManager : MonoBehaviour
 
     // Properties
     public int Gold { get => gold; set => setGold(value); }
+    public List<Recipe> KnownRecipes { get => knownRecipes; }
     public Chair[] Chairs { get => chairs; }
 
     private void Awake()
@@ -48,6 +51,11 @@ public class TavernManager : MonoBehaviour
         Debug.Log("Position: " + barRT.rect.width);
     }
 
+    public void addNewRecipe(Recipe newRecipe)
+    {
+        knownRecipes.Add(newRecipe);
+    }
+
     public void addDish(Dish dish)
     {
         if (Dishes.ContainsKey(dish))
@@ -60,7 +68,7 @@ public class TavernManager : MonoBehaviour
         bar.GetComponent<Bar>().refresh();
     }
 
-    public void removeDish(Dish dish)
+    public bool removeDish(Dish dish)
     {
         if (Dishes.ContainsKey(dish))
         {
@@ -69,8 +77,12 @@ public class TavernManager : MonoBehaviour
             bar.GetComponent<Bar>().refresh();
 
             if (Dishes[dish] <= 0)
-                Dishes.Remove(dish);        
+                Dishes.Remove(dish);
+
+            return true;
         }
+
+        return false;
     }
     
     public int getNumDishes()

@@ -23,19 +23,18 @@ public class Chair : MonoBehaviour
     void Update()
     {
         Dish selectedDish;
-        if(occupied && table.Empty)
+        if(occupied && table.Empty && (selectedDish = occupant.GetComponent<NPC>().SelectedDish) && occupant.GetComponent<NPC>().Eating )
         {
-            if(selectedDish = occupant.GetComponent<NPC>().SelectedDish )
-            {
-                table.setDish(selectedDish);
-            }
+            table.setDish(selectedDish);
         }
     }
 
     public void setNPC(GameObject npc)
     {
-        gameObject.GetComponent<Image>().enabled = true;
-        gameObject.GetComponent<Image>().sprite = npcSprite;
+        // These two lines of code feel redundant. Need to look into
+        // why our canvas only accepts images and not sprites
+        //gameObject.GetComponent<Image>().enabled = true;
+        //gameObject.GetComponent<Image>().sprite = npcSprite;
         occupied = true;
         occupant = npc; 
     }

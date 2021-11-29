@@ -62,8 +62,12 @@ public class NPCManager : MonoBehaviour
         {
             if(!chair.Occupied)
             {
-                GameObject newNPC = Instantiate(npcPrefab);
-                newNPC.transform.position = chair.transform.position; 
+                GameObject newNPC = Instantiate(npcPrefab, chair.transform);
+                // Getting nested children
+                //GameObject iconParent = newNPC.transform.GetChild(0).gameObject;
+                //GameObject requestedFoodIcon = iconParent.transform.GetChild(0).gameObject;
+                //requestedFoodIcon.GetComponent<SpriteRenderer>().sprite = newNPC.GetComponent<NPC>().SelectedDish.sprite;
+                newNPC.transform.position = chair.transform.position;
                 chair.setNPC(newNPC);
                 guestCount++;
                 return;
