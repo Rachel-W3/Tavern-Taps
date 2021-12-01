@@ -34,7 +34,7 @@ public class IngredientMenu : MonoBehaviour
         prevIngredientButton.clicked += prevIngredient;
 
         //Hide the ingredient view
-        var ingredientView = root.Q<VisualElement>("IngredientView");
+        var ingredientView = root.Q<VisualElement>("IngredientView"); 
         ingredientView.style.display = StyleKeyword.None;
 
         //For each unique ingredient in the ingredient inventory, create a recipe menu item and add it to the container

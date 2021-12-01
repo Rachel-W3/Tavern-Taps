@@ -97,7 +97,7 @@ public class RecipeMenu : MonoBehaviour
         }
 
         var DishName = root.Q<Label>("DishName");
-        DishName.text = recipe.FinishedProduct.Name;
+        DishName.text = recipe.FinishedProduct.Name; 
 
         var DishImage = root.Q<VisualElement>("DishImage");
 
