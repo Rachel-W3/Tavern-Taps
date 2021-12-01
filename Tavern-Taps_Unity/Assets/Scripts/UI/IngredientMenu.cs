@@ -9,14 +9,9 @@ public class IngredientMenu : MonoBehaviour
     [SerializeField] private VisualTreeAsset ingredientTemplate;
     private int ingredientIndex = 0;
 
-    public void Start()
-    {
-        ingredients = IngredientManager.Ingredients.ingredientInventory;
-    }
-
     public void refreshUI()
     {
-        
+        ingredients = IngredientManager.Ingredients.ingredientInventory;
         var root = GetComponent<UIDocument>().rootVisualElement;
         var ingredientContainer = root.Q<VisualElement>("ingredientsContainer");
 
@@ -74,7 +69,7 @@ public class IngredientMenu : MonoBehaviour
 
     private void showIngredientView(Ingredient ingredient, int qty)
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
+        var root = GetComponent<UIDocument>().rootVisualElement; 
         var ingredientView = root.Q<VisualElement>("IngredientView");
 
         ingredientIndex = FindIngredientIndex(ingredient);
