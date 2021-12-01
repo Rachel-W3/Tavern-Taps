@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="DarkOverlay" style="position: absolute; width: 100%; height: 100%; background-color: rgb(0, 0, 0); opacity: 0.5;" />
     <ui:Label text="Ingredients" display-tooltip-when-elided="true" name="IngredientMenuLabel" style="-unity-text-align: upper-center; font-size: 30px; height: 7%;" />
-    <ui:Button text="X" display-tooltip-when-elided="true" name="MenuExitButton" style="position: absolute; top: auto; left: 87.5%; height: 6.75%; width: 12%; bottom: 93%; background-image: url(&apos;/Assets/Images/UI/RoundedSquare_button.png&apos;); background-color: rgba(228, 228, 228, 0);" />
+    <ui:Button text="X" display-tooltip-when-elided="true" name="MenuExitButton" style="position: absolute; top: auto; left: 87.5%; height: 6.75%; width: 12%; bottom: 93%; background-image: url(&apos;/Assets/Images/UI/RoundedSquare_button.png&apos;); background-color: rgba(228, 228, 228, 0); border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0);" />
     <ui:ScrollView name="IngredientMenu" style="flex-direction: row; flex-wrap: wrap; width: 100%; height: 83%;">
         <ui:VisualElement name="ingredientsContainer" style="height: 100%; flex-direction: row; flex-wrap: wrap;" />
     </ui:ScrollView>
@@ -16,9 +16,9 @@
                 </ui:VisualElement>
                 <ui:Label text="This is default text, if you see it something has gone wrong" display-tooltip-when-elided="true" name="Description" style="font-size: 20%; white-space: normal; top: 2%; -unity-text-outline-width: 0; -unity-text-outline-color: rgb(0, 0, 0); color: rgb(0, 0, 0); left: 0; width: auto; margin-left: 8%; margin-right: 8%; margin-top: 0; margin-bottom: 8%;" />
             </ui:VisualElement>
-            <ui:Button text="&gt;" display-tooltip-when-elided="true" name="NextIngredient" style="position: absolute; top: 35%; left: 90%; height: 25%; width: 10%; background-image: url(&apos;/Assets/Images/UI/RoundedRect_button.png&apos;); background-color: rgba(228, 228, 228, 0);" />
-            <ui:Button text="&lt;" display-tooltip-when-elided="true" name="PrevIngredient" style="position: absolute; top: 35%; left: auto; height: 25%; width: 10%; right: 90%; background-image: url(&apos;/Assets/Images/UI/RoundedRect_button.png&apos;); background-color: rgba(200, 200, 200, 0);" />
-            <ui:Button text="X" display-tooltip-when-elided="true" name="ViewExitButton" style="position: absolute; top: auto; left: 87.5%; height: 8%; width: 12%; bottom: 87.5%; background-image: url(&apos;/Assets/Images/UI/RoundedSquare_button.png&apos;); background-color: rgba(228, 228, 228, 0);" />
+            <ui:Button text="&gt;" display-tooltip-when-elided="true" name="NextIngredient" style="position: absolute; top: 35%; left: 90%; height: 25%; width: 10%; background-image: url(&apos;/Assets/Images/UI/RoundedRect_button.png&apos;); background-color: rgba(228, 228, 228, 0); border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0);" />
+            <ui:Button text="&lt;" display-tooltip-when-elided="true" name="PrevIngredient" style="position: absolute; top: 35%; left: auto; height: 25%; width: 10%; right: 90%; background-image: url(&apos;/Assets/Images/UI/RoundedRect_button.png&apos;); background-color: rgba(200, 200, 200, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;" />
+            <ui:Button text="X" display-tooltip-when-elided="true" name="ViewExitButton" style="position: absolute; top: auto; left: 87.5%; height: 8%; width: 12%; bottom: 87.5%; background-image: url(&apos;/Assets/Images/UI/RoundedSquare_button.png&apos;); background-color: rgba(228, 228, 228, 0); border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
