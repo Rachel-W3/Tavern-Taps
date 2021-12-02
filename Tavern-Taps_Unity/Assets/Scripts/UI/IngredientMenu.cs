@@ -7,7 +7,7 @@ public class IngredientMenu : MonoBehaviour
 {
     public List<KeyValuePair<Ingredient, int>> ingredients;
     [SerializeField] private VisualTreeAsset ingredientTemplate;
-    private int ingredientIndex = 0;
+    private int ingredientIndex = 0; 
 
     public void refreshUI()
     {
