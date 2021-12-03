@@ -53,7 +53,8 @@ public class RecipeMenu : MonoBehaviour
             recipeName.text = recipe.FinishedProduct.Name;
 
             var recipeButton = recipeContainer.Query<Button>().Last();
-            recipeButton.style.backgroundImage = recipe.FinishedProduct.Image;
+            var recipeImage = recipeContainer.Query<VisualElement>().Last();
+            recipeImage.style.backgroundImage = recipe.FinishedProduct.Image;
             recipeButton.clicked += () => showDishView(recipe);
 
         }
@@ -97,7 +98,7 @@ public class RecipeMenu : MonoBehaviour
         }
 
         var DishName = root.Q<Label>("DishName");
-        DishName.text = recipe.FinishedProduct.Name;
+        DishName.text = recipe.FinishedProduct.Name; 
 
         var DishImage = root.Q<VisualElement>("DishImage");
 
@@ -116,7 +117,7 @@ public class RecipeMenu : MonoBehaviour
 
     private void hideDishMenu()
     {
-        GetComponent<UIDocument>().enabled = false;
+        GetComponent<UIDocument>().enabled = false; 
     }
 
     private void hideIngredientMenu()

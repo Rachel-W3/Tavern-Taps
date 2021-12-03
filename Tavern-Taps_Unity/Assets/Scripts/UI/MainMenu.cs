@@ -6,6 +6,9 @@ using UnityEngine.UIElements;
 
 public class MainMenu : MonoBehaviour
 {
+    /**NOTE: All map related code is temporarily commented out,
+     so people don't get confused as to what that button does.**/
+
     private enum GAME_STATE
     {
         FARM, TAVERN, MAP
@@ -25,7 +28,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     { 
-        var root = GetComponent<UIDocument>().rootVisualElement; 
+        var root = GetComponent<UIDocument>().rootVisualElement;
 
         ChangeGameState(GAME_STATE.TAVERN);
 
@@ -35,8 +38,8 @@ public class MainMenu : MonoBehaviour
         var TavernButton = root.Q<UnityEngine.UIElements.Button>("TavernButton");
         TavernButton.clicked += () => ChangeGameState(GAME_STATE.TAVERN);
 
-        var MapButton = root.Q<UnityEngine.UIElements.Button>("MapButton");
-        MapButton.clicked += () => ChangeGameState(GAME_STATE.MAP);
+        //var MapButton = root.Q<UnityEngine.UIElements.Button>("MapButton");
+        //MapButton.clicked += () => ChangeGameState(GAME_STATE.MAP);
 
         var IngredientButton = root.Q<UnityEngine.UIElements.Button>("IngredientButton");
         IngredientButton.clicked += () => showIngredientOverlay();
@@ -57,7 +60,7 @@ public class MainMenu : MonoBehaviour
                 if (gameState != GAME_STATE.FARM)
                 { 
                     ShowObject(FarmUI);
-                    HideObject(MapUI);
+                    //HideObject(MapUI);
                     HideObject(TavernUI);
                     gameState = GAME_STATE.FARM;
                 }
@@ -67,21 +70,21 @@ public class MainMenu : MonoBehaviour
                 if (gameState != GAME_STATE.TAVERN)
                 { 
                     ShowObject(TavernUI);
-                    HideObject(MapUI);
+                    //HideObject(MapUI);
                     HideObject(FarmUI);
                     gameState = GAME_STATE.TAVERN;
                 }
                 break;
 
-            case GAME_STATE.MAP:
-                if (gameState != GAME_STATE.MAP)
-                {
-                    ShowObject(MapUI);
-                    HideObject(FarmUI);
-                    HideObject(TavernUI);
-                    gameState = GAME_STATE.MAP;
-                }
-                break;
+            //case GAME_STATE.MAP:
+            //    if (gameState != GAME_STATE.MAP)
+            //    {
+            //        ShowObject(MapUI);
+            //        HideObject(FarmUI);
+            //        HideObject(TavernUI);
+            //        gameState = GAME_STATE.MAP;
+            //    }
+            //    break;
 
             default:
                 break;

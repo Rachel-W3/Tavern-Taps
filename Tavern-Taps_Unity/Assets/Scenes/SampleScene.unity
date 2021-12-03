@@ -1664,7 +1664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: c48e8f2c6b0e0ee419b4dc1b496e9c56, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 214be4990969427429aa2ad0eb32bbcd, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 8205c79af9be89a479f2ee993b1a043d, type: 3}
   m_SortingOrder: 2
 --- !u!114 &1859532762
 MonoBehaviour:
@@ -1673,12 +1673,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1859532759}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25367bc59ec5bd04f8c0271f73c752b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientTemplate: {fileID: 9197481963319205126, guid: d76009da3aabe6e4abafacc78a0af72a, type: 3}
+  ingredientTemplate: {fileID: 9197481963319205126, guid: 02f99dda9962eaa41b30116a87433474, type: 3}
 --- !u!1 &1883478389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1968,7 +1968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a70842468e6944d9b7dd2d4c13afee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipeTemplate: {fileID: 9197481963319205126, guid: 5cd92945d8efaf54592ee823d7ea4d59, type: 3}
+  recipeTemplate: {fileID: 9197481963319205126, guid: 6d476deccfb1a784892c1594f39496b1, type: 3}
 --- !u!114 &2097385816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1983,7 +1983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: c48e8f2c6b0e0ee419b4dc1b496e9c56, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 11398c06b6bf86b42a12c0e9f0880ea3, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 391da94626c5ac8489c160092a3b93f6, type: 3}
   m_SortingOrder: 2
 --- !u!4 &2097385817
 Transform:

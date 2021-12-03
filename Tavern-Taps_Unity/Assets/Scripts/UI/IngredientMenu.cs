@@ -7,16 +7,11 @@ public class IngredientMenu : MonoBehaviour
 {
     public List<KeyValuePair<Ingredient, int>> ingredients;
     [SerializeField] private VisualTreeAsset ingredientTemplate;
-    private int ingredientIndex = 0;
-
-    public void Start()
-    {
-        ingredients = IngredientManager.Ingredients.ingredientInventory;
-    }
+    private int ingredientIndex = 0; 
 
     public void refreshUI()
     {
-        
+        ingredients = IngredientManager.Ingredients.ingredientInventory;
         var root = GetComponent<UIDocument>().rootVisualElement;
         var ingredientContainer = root.Q<VisualElement>("ingredientsContainer");
 
@@ -34,7 +29,7 @@ public class IngredientMenu : MonoBehaviour
         prevIngredientButton.clicked += prevIngredient;
 
         //Hide the ingredient view
-        var ingredientView = root.Q<VisualElement>("IngredientView");
+        var ingredientView = root.Q<VisualElement>("IngredientView"); 
         ingredientView.style.display = StyleKeyword.None;
 
         //For each unique ingredient in the ingredient inventory, create a recipe menu item and add it to the container
@@ -74,7 +69,7 @@ public class IngredientMenu : MonoBehaviour
 
     private void showIngredientView(Ingredient ingredient, int qty)
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
+        var root = GetComponent<UIDocument>().rootVisualElement; 
         var ingredientView = root.Q<VisualElement>("IngredientView");
 
         ingredientIndex = FindIngredientIndex(ingredient);
