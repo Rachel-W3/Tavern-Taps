@@ -102,6 +102,7 @@ public class IngredientMenu : MonoBehaviour
     private void hideIngredientMenu()
     {
         GetComponent<UIDocument>().enabled = false;
+        MainMenu.enableIngredientPlots();
     }
 
     private int FindIngredientIndex(Ingredient ingredient)
