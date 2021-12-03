@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ../Tavern-Taps_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637693161361630311
+  lastModified: 637697380263210268
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -41,7 +41,7 @@ MonoBehaviour:
   - {fileID: -6317994413277730463}
   StringsBanks:
   - {fileID: 1989464257893630724}
-  stringsBankWriteTime: 637693161361670313
+  stringsBankWriteTime: 637697380263210268
   cacheVersion: 6
 --- !u!114 &1013225381451633150
 MonoBehaviour:
@@ -100,7 +100,7 @@ MonoBehaviour:
   Path: ../Tavern-Taps_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637693161361670313
+  lastModified: 637697380263210268
   LoadResult: 0
   FileSizes:
   - Name: Desktop
