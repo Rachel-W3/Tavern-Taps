@@ -1968,7 +1968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a70842468e6944d9b7dd2d4c13afee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipeTemplate: {fileID: 9197481963319205126, guid: 5cd92945d8efaf54592ee823d7ea4d59, type: 3}
+  recipeTemplate: {fileID: 9197481963319205126, guid: 52dc7c50df28cf941914e16c1781727a, type: 3}
 --- !u!114 &2097385816
 MonoBehaviour:
   m_ObjectHideFlags: 0

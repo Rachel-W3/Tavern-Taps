@@ -53,7 +53,8 @@ public class RecipeMenu : MonoBehaviour
             recipeName.text = recipe.FinishedProduct.Name;
 
             var recipeButton = recipeContainer.Query<Button>().Last();
-            recipeButton.style.backgroundImage = recipe.FinishedProduct.Image;
+            var recipeImage = recipeContainer.Query<VisualElement>().Last();
+            recipeImage.style.backgroundImage = recipe.FinishedProduct.Image;
             recipeButton.clicked += () => showDishView(recipe);
 
         }
