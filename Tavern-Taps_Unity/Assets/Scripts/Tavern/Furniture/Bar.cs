@@ -22,15 +22,17 @@ public class Bar : MonoBehaviour
     }
 
     public void refresh()
-    {
-        StopCoroutine(flickerRoutine);
+    {   
         GetComponent<Image>().color = Color.white;
 
+        bool isEmpty = true;
         foreach (KeyValuePair<Dish, int> dish in TavernManager.Instance.Dishes)
         {
             //This is rushed and bad, It will need to be changed
             if (dish.Value > 0)
             {
+                isEmpty = false;
+                StopCoroutine(flickerRoutine);
                 if (dish.Key.Name == "Dire bacon and eggs")
                 {
                     ShowObject(bacon_n_eggs);
@@ -55,6 +57,13 @@ public class Bar : MonoBehaviour
                     HideObject(mandrake_stirfry);
             }
         }
+
+        // If values of cooked dishes are all zero, resume flickering
+        if (isEmpty)
+        {
+            StartCoroutine(flickerRoutine);
+        }
+
         return;
     }
 
@@ -66,7 +75,7 @@ public class Bar : MonoBehaviour
         while (true)
         {
             yield return waitForFlicker;
-            GetComponent<Image>().color = Color.red;
+            GetComponent<Image>().color = Color.gray;
             yield return waitForFlicker;
             GetComponent<Image>().color = originalColor;
         }

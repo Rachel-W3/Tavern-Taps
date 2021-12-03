@@ -117,7 +117,7 @@ public class RecipeMenu : MonoBehaviour
 
     private void hideDishMenu()
     {
-        GetComponent<UIDocument>().enabled = false;
+        GetComponent<UIDocument>().enabled = false; 
     }
 
     private void hideIngredientMenu()

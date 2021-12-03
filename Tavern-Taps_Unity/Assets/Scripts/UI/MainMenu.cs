@@ -6,6 +6,9 @@ using UnityEngine.UIElements;
 
 public class MainMenu : MonoBehaviour
 {
+    /**NOTE: All map related code is temporarily commented out,
+     so people don't get confused as to what that button does.**/
+
     private enum GAME_STATE
     {
         FARM, TAVERN, MAP
