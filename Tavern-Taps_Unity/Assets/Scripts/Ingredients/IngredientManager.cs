@@ -74,7 +74,8 @@ public class IngredientManager : MonoBehaviour
                 {
                     newValue = kvp.Value - amt;
                     ingredientInventory.Remove(kvp);
-                    ingredientInventory.Add(new KeyValuePair<Ingredient, int>(ingredient, newValue));
+                    if(newValue > 0)
+                        ingredientInventory.Add(new KeyValuePair<Ingredient, int>(ingredient, newValue));
                 }
             }
         }

@@ -24,10 +24,14 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private UnityEngine.UI.Button recipeButton;
 
-    
+    private static IngredientPlot[] ingredientPlots;
+    private static Bar[] bars; 
 
     void Start()
-    { 
+    {
+        ingredientPlots = FindObjectsOfType<IngredientPlot>();
+        bars = FindObjectsOfType<Bar>();
+
         var root = GetComponent<UIDocument>().rootVisualElement;
 
         ChangeGameState(GAME_STATE.TAVERN);
@@ -118,17 +122,33 @@ public class MainMenu : MonoBehaviour
     private void hideIngredientOverlay()
     {
         HideObject(IngredientOverlay);
+        enableIngredientPlots();
+        enableBars();
     }
 
     private void hideRecipeOverlay()
     {
         HideObject(RecipeOverlay);
+        enableIngredientPlots();
+        enableBars();
     }
 
     public void hideAllOverlays()
     {
         hideIngredientOverlay();
         hideRecipeOverlay();
+    }
+
+    public static void disableIngredientPlots()
+    {
+        foreach (IngredientPlot ingredientPlot in ingredientPlots)
+            ingredientPlot.GetComponent<UnityEngine.UI.Button>().interactable = false;
+    }
+
+    public static void disableBars()
+    {
+        foreach (Bar bar in bars)
+            bar.GetComponent<UnityEngine.UI.Button>().interactable = false;
     }
 
     private void ShowObject(GameObject gameObject)
@@ -156,6 +176,8 @@ public class MainMenu : MonoBehaviour
     private void showIngredientOverlay()
     {
         hideAllOverlays();
+        disableIngredientPlots();
+        disableBars();
         ShowObject(IngredientOverlay);
         IngredientMenu ingredientMenu = IngredientOverlay.GetComponent<IngredientMenu>();
         ingredientMenu.refreshUI();
@@ -164,9 +186,23 @@ public class MainMenu : MonoBehaviour
     private void showRecipeOverlay()
     {
         hideAllOverlays();
+        disableIngredientPlots();
+        disableBars();
         ShowObject(RecipeOverlay);
         RecipeMenu recipeMenu = RecipeOverlay.GetComponent<RecipeMenu>();
         recipeMenu.refreshUI();
+    }
+
+    public static void enableIngredientPlots()
+    {
+        foreach (IngredientPlot ingredientPlot in ingredientPlots)
+            ingredientPlot.GetComponent<UnityEngine.UI.Button>().interactable = true;
+    }
+
+    public static void enableBars()
+    {
+        foreach (Bar bar in bars)
+            bar.GetComponent<UnityEngine.UI.Button>().interactable = true;
     }
 
     public static void updateMoneyUI(int amt)

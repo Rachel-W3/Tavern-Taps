@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class NPC : MonoBehaviour
@@ -14,6 +15,8 @@ public class NPC : MonoBehaviour
     /**************/ private bool        satisfied;
     /**************/ private GameObject  icon;
     [SerializeField] private GameObject  iconPrefab;
+    /**************/ private ProgressBar progressBar;
+
 
     // Properties
     public bool Satisfied { get => satisfied; }
@@ -23,6 +26,10 @@ public class NPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        progressBar = GetComponentsInChildren<ProgressBar>()[0];
+        progressBar.setupProgressBar(totalEatingTime);
+        progressBar.updateProgressBar(0.0f);
+
         eating = false;
         satisfied = false;
         iconPrefab.GetComponent<RectTransform>().position = new Vector3(0, 3.57f, 0);
@@ -33,7 +40,7 @@ public class NPC : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(!eating && timer >= timePickingFood)
+        if (!eating && timer >= timePickingFood)
         {
             if(!selectedDish)
                 OrderFood();
@@ -42,11 +49,16 @@ public class NPC : MonoBehaviour
             timer = 0.0f;
         }
 
-        if(eating && timer >= totalEatingTime)
+        if(eating) 
         {
-            satisfied = true;
-            TavernManager.Instance.Gold += selectedDish.GoldOutput;
-            timer = 0.0f;
+            progressBar.updateProgressBar(timer);
+
+            if (timer >= totalEatingTime)
+            {
+                satisfied = true;
+                TavernManager.Instance.Gold += selectedDish.GoldOutput;
+                timer = 0.0f;
+            }
         }
     }
 
@@ -103,7 +115,8 @@ public class NPC : MonoBehaviour
     /// </summary>
     bool EatFood()
     {
-        if(TavernManager.Instance.removeDish(selectedDish))
+
+        if (TavernManager.Instance.removeDish(selectedDish))
         { 
             icon.SetActive(false);
             eating = true;
