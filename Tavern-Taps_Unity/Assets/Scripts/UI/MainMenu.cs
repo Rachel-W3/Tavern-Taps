@@ -24,11 +24,13 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private UnityEngine.UI.Button recipeButton;
 
-    private static IngredientPlot[] ingredientPlots; 
+    private static IngredientPlot[] ingredientPlots;
+    private static Bar[] bars; 
 
     void Start()
     {
         ingredientPlots = FindObjectsOfType<IngredientPlot>();
+        bars = FindObjectsOfType<Bar>();
 
         var root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -121,12 +123,14 @@ public class MainMenu : MonoBehaviour
     {
         HideObject(IngredientOverlay);
         enableIngredientPlots();
+        enableBars();
     }
 
     private void hideRecipeOverlay()
     {
         HideObject(RecipeOverlay);
         enableIngredientPlots();
+        enableBars();
     }
 
     public void hideAllOverlays()
@@ -139,6 +143,12 @@ public class MainMenu : MonoBehaviour
     {
         foreach (IngredientPlot ingredientPlot in ingredientPlots)
             ingredientPlot.GetComponent<UnityEngine.UI.Button>().interactable = false;
+    }
+
+    public static void disableBars()
+    {
+        foreach (Bar bar in bars)
+            bar.GetComponent<UnityEngine.UI.Button>().interactable = false;
     }
 
     private void ShowObject(GameObject gameObject)
@@ -167,6 +177,7 @@ public class MainMenu : MonoBehaviour
     {
         hideAllOverlays();
         disableIngredientPlots();
+        disableBars();
         ShowObject(IngredientOverlay);
         IngredientMenu ingredientMenu = IngredientOverlay.GetComponent<IngredientMenu>();
         ingredientMenu.refreshUI();
@@ -176,6 +187,7 @@ public class MainMenu : MonoBehaviour
     {
         hideAllOverlays();
         disableIngredientPlots();
+        disableBars();
         ShowObject(RecipeOverlay);
         RecipeMenu recipeMenu = RecipeOverlay.GetComponent<RecipeMenu>();
         recipeMenu.refreshUI();
@@ -185,6 +197,12 @@ public class MainMenu : MonoBehaviour
     {
         foreach (IngredientPlot ingredientPlot in ingredientPlots)
             ingredientPlot.GetComponent<UnityEngine.UI.Button>().interactable = true;
+    }
+
+    public static void enableBars()
+    {
+        foreach (Bar bar in bars)
+            bar.GetComponent<UnityEngine.UI.Button>().interactable = true;
     }
 
     public static void updateMoneyUI(int amt)
