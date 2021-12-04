@@ -9,7 +9,7 @@ public class TitleScreen : MonoBehaviour
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
-        var titleScreen = root.Q<Button>("titleScreen");
+        var titleScreen = root.Q<Button>("buttonOverlay");
         titleScreen.clicked += disableTitleScreen;
 
         MainMenu.disableIngredientPlots();
