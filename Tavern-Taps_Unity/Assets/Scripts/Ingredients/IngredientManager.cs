@@ -65,17 +65,19 @@ public class IngredientManager : MonoBehaviour
     public void removeIngredient(Ingredient ingredient, int amt)
     {
         int newValue;
-        for(int i = 0; i < ingredientInventory.Count; i++)
-        {
-            KeyValuePair<Ingredient, int> kvp = ingredientInventory[i];
-            if (kvp.Key.ingredientName == ingredient.ingredientName)
+        if(checkIngredient(amt, ingredient))
+        { 
+            for(int i = 0; i < ingredientInventory.Count; i++)
             {
-                newValue = kvp.Value - amt;
-                ingredientInventory.Remove(kvp);
-                if(newValue > 0)
-                    ingredientInventory.Add(new KeyValuePair<Ingredient, int>(ingredient, newValue));
+                KeyValuePair<Ingredient, int> kvp = ingredientInventory[i];
+                if (kvp.Key.ingredientName == ingredient.ingredientName)
+                {
+                    newValue = kvp.Value - amt;
+                    ingredientInventory.Remove(kvp);
+                    if(newValue > 0)
+                        ingredientInventory.Add(new KeyValuePair<Ingredient, int>(ingredient, newValue));
+                }
             }
-                        
         }
     }
 
